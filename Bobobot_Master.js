@@ -36,6 +36,7 @@ Command.output = function (msg) {
 };
 
 
+
 function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName, threadId) {
 
     
@@ -126,17 +127,21 @@ if(room_name.indexOf(room)!=-1 && msg.indexOf('!레벨 ') != -1){
   var strReply = '[' + level[1] + ']\n'
              + 'Lv.'+ char_lv +' ('+ percentage + '%)\n';
 
- var per_ten = percentage.substr(0,1);
+var per_ten = percentage.substr(0,1);
+ var per_cnt = per_ten;
 
   for(var i = 0; i < 10; i++){
-     if(per_ten > 0 && Number(percentage) >= 10){
+     if(per_cnt > 0 && Number(percentage) >= 10){
         strReply += '■';
      }else{
-        strReply += '□';
+        if(per_cnt == 0 && Number(percentage) - (per_ten*10) >= 8){
+            strReply += '■';
+        }else{
+            strReply += '□';
+        }
      }
-     per_ten = per_ten - 1;
+     per_cnt = per_cnt - 1;
   }
-  
   if(level.length == 3){
      if(!isNumeric(level[2])) {
      replier.reply("레벨에는 숫자만 입력해주세요");
