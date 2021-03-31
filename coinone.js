@@ -273,8 +273,8 @@ function response(
                     100).toFixed(2) + "%)" +
                 "\n\n고가: " + numberWithCommas(parseFloat(coin_info_obj.high)) +
                 "\n저가: " + numberWithCommas(parseFloat(coin_info_obj.low)) +
-                "\n변동: " + numberWithCommas(parseInt(coin_info_obj.yesterday_last-coin_info_obj.last)) +
-                "(" + parseFloat((coin_info_obj.yesterday_last-coin_info_obj.last) / coin_info_obj.last * 100).toFixed(2) + "%)"
+                "\n변동: " + numberWithCommas(parseInt(coin_info_obj.last-coin_info_obj.yesterday_last)) +
+                "(" + parseFloat((coin_info_obj.last-coin_info_obj.yesterday_last) / coin_info_obj.last * 100).toFixed(2) + "%)"
             );
             return;
         }
@@ -286,8 +286,8 @@ function response(
             "￦ " + numberWithCommas(parseFloat(coin_info_obj.last)) +
             "\n고가: " + numberWithCommas(parseFloat(coin_info_obj.high)) +
             "\n저가: " + numberWithCommas(parseFloat(coin_info_obj.low)) +
-            "\n변동: " + numberWithCommas(parseFloat(coin_info_obj.yesterday_last-coin_info_obj.last).toFixed(2)) +
-            "(" + parseFloat((coin_info_obj.yesterday_last-coin_info_obj.last) / coin_info_obj.last * 100).toFixed(2) + "%)"
+            "\n변동: " + numberWithCommas(parseFloat(coin_info_obj.last-coin_info_obj.yesterday_last).toFixed(2)) +
+            "(" + parseFloat((coin_info_obj.last-coin_info_obj.yesterday_last) / coin_info_obj.last * 100).toFixed(2) + "%)"
         );
 
     }
