@@ -6,7 +6,7 @@
 const arr_room = ["민재", "BOT"];
 
 //market list
-var market_list = ["upbit", "coinone"];//["upbit","bithumb","flat","coinone","binance"];
+var market_list = ["upbit", "bithumb", "coinone"];//["upbit","bithumb","flat","coinone","binance"];
 //api uri obj
 var api_uri = {
     "upbit": {
@@ -283,6 +283,93 @@ var coin_list_by_market = {
     }
 
 }
+const bthList = new Map();
+bthList.set("메이커", "MKR");
+bthList.set("앵커뉴럴월드", "ANW");
+bthList.set("제노토큰", "XNO");
+bthList.set("템코", "TEMCO");
+bthList.set("크로미아", "CHR");
+bthList.set("오르빗체인", "ORC");
+bthList.set("콘텐토스", "COS");
+bthList.set("드레곤베인", "DVC");
+bthList.set("아모코인", "AMO");
+bthList.set("오로라", "AOA");
+bthList.set("엘리시아", "EL");
+bthList.set("300피트네트워크", "FIT");
+bthList.set("어댑터토큰", "ADP");
+bthList.set("이브이지", "EVG");
+bthList.set("더마이다스터치골드", "TMTG");
+bthList.set("옵저버", "OBSR");
+bthList.set("연파이낸스", "YFI");
+bthList.set("리니어파이낸스", "LINA");
+bthList.set("프로톤", "XPR");
+bthList.set("바이오패스포트", "BIOT");
+bthList.set("믹스마블", "MIX");
+bthList.set("다빈치", "DAC");
+bthList.set("퀸비", "QBZ");
+bthList.set("버거스왑", "BURGER");
+bthList.set("위믹스", "WEMIX");
+bthList.set("밀리미터토큰", "MM");
+bthList.set("폴라리스쉐어", "POLA");
+bthList.set("에이치닥", "HDAC");
+bthList.set("아이콘", "ICX");
+bthList.set("지엑스체인", "GXC");
+bthList.set("네스트리", "EGG");
+bthList.set("고머니2", "GOM2");
+bthList.set("애니버스", "ANV");
+bthList.set("디브이피", "DVP");
+bthList.set("플레타", "FLETA");
+bthList.set("퀴즈톡", "QTCON");
+bthList.set("보아", "BOA");
+bthList.set("더그래프", "GRT");
+bthList.set("비트코인다이아몬드", "BCD");
+bthList.set("알파체인", "ARPA");
+bthList.set("프레시움", "PCM");
+bthList.set("펑션엑스", "FX");
+bthList.set("어거", "REP");
+bthList.set("하이브", "HIVE");
+bthList.set("에프앤비프로토콜", "FNB");
+bthList.set("알고랜드", "ALGO");
+bthList.set("아이온", "AION");
+bthList.set("사이버베인", "CVT");
+bthList.set("코넌", "CON");
+bthList.set("월튼체인", "WTC");
+bthList.set("에이피엠코인", "APM");
+bthList.set("밸러토큰", "VALOR");
+bthList.set("세럼", "SRM");
+bthList.set("엠씨아이", "MCI");
+bthList.set("다드", "DAD");
+bthList.set("미러프로토콜", "MIR");
+bthList.set("코르텍스", "CTXC");
+bthList.set("아픽스", "APIX");
+bthList.set("소다코인", "SOC");
+bthList.set("젠서", "XSR");
+bthList.set("트러스트버스", "TRV");
+bthList.set("애터니티", "AE");
+bthList.set("스트라티스", "STRAX");
+bthList.set("신세틱스", "SNX");
+bthList.set("에이아이워크", "AWO");
+bthList.set("썬", "SUN");
+bthList.set("트루체인", "TRUE");
+bthList.set("에이브", "AAVE");
+bthList.set("머신익스체인지코인", "MXC");
+bthList.set("이마이너", "EM");
+bthList.set("센트럴리티", "CENNZ");
+bthList.set("위쇼토큰", "WET");
+bthList.set("브이시스템즈", "VSYS");
+bthList.set("루프링", "LRC");
+bthList.set("스시스왑", "SUSHI");
+bthList.set("컴파운드", "COMP");
+bthList.set("웨이키체인", "WICC");
+bthList.set("벨라프로토콜", "BEL");
+bthList.set("우마", "UMA");
+bthList.set("왐토큰", "WOM");
+bthList.set("타키온프로토콜", "IPX");
+bthList.set("타키온", "IPX");
+bthList.set("이포스", "WOZX");
+bthList.set("원루트네트워크", "RNT");
+bthList.set("맵프로토콜", "MAP");
+bthList.set("마일벌스", "MVC");
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
     if (arr_room.indexOf(room) == -1) {
@@ -323,6 +410,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (market_name == "upbit") {
                 //upbit에는 코인 리스트 가져오는 api가 있음
                 coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
+            } else if (market_name == "bithumb") {
+                coin_list_obj = bthList;
             } else {
                 //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
                 coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
@@ -467,6 +556,14 @@ function coin_check(market_name, value, coin_list_obj) {
         }
         /**************************************** 코인원 ********************************************/
 
+    } else if (market_name == "bithumb") {
+        coin_list_obj.forEach(function (val, key) {
+            if (key.includes(value)) {
+                symbol = val;
+                name = key;
+                return;
+            }
+        });
     }
 
     if (name != null || symbol != null) {
@@ -508,6 +605,12 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
         low_price = coin_info_obj.low;
         change_price = coin_info_obj.last - coin_info_obj.yesterday_last;
         change_rate = (coin_info_obj.last - coin_info_obj.yesterday_last) / coin_info_obj.yesterday_last * 100;
+    } else if (market_name == "bithumb") {
+        trade_price = coin_info_obj.data.closing_price;
+        high_price = coin_info_obj.data.max_price;
+        low_price = coin_info_obj.data.min_price;
+        change_price = coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price;
+        change_rate = (coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100;
     }
     change_arrow = change_price == 0 ? "-" : change_price > 0 ? "▲" : "▼";
 
@@ -535,6 +638,8 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
         market_name = "업비트";
     } else if (market_name == "coinone") {
         market_name = "코인원";
+    } else if (market_name == "bithumb") {
+        market_name = "빗썸";
     }
     var dollar = "";
     if (symbol == "BTC" || symbol == "btc") {

@@ -8,286 +8,104 @@ const scriptName = "MoonBot";
  * (string) imageDB.getProfileBase64()
  * (string) packageName
  */
- /*////////////////////////////////////
-  전역변수 설정 부분입니다.
-  histort - 오태윤 20210326 변수 최초생성
-        -
+/*////////////////////////////////////
+ 전역변수 설정 부분입니다.
+ histort - 오태윤 20210326 변수 최초생성
+       -
 ////////////////////////////////////*/
-const arr_room = ["종학","BOT"];
+const arr_room = ["종학", "BOT"];
 const bthList = new Map();
-    bthList.set("메이커","MKR");
-    bthList.set("앵커뉴럴월드","ANW");
-    bthList.set("제노토큰","XNO");
-    bthList.set("템코","TEMCO");
-    bthList.set("크로미아","CHR");
-    bthList.set("오르빗체인","ORC");
-    bthList.set("콘텐토스","COS");
-    bthList.set("드레곤베인","DVC");
-    bthList.set("아모코인","AMO");
-    bthList.set("오로라","AOA");
-    bthList.set("엘리시아","EL");
-    bthList.set("300피트네트워크","FIT");
-    bthList.set("어댑터토큰","ADP");
-    bthList.set("이브이지","EVG");
-    bthList.set("더마이다스터치골드","TMTG");
-    bthList.set("옵저버","OBSR");
-    bthList.set("연파이낸스","YFI");
-    bthList.set("리니어파이낸스","LINA");
-    bthList.set("프로톤","XPR");
-    bthList.set("바이오패스포트","BIOT");
-    bthList.set("믹스마블","MIX");
-    bthList.set("다빈치","DAC");
-    bthList.set("퀸비","QBZ");
-    bthList.set("버거스왑","BURGER");
-    bthList.set("위믹스","WEMIX");
-    bthList.set("밀리미터토큰","MM");
-    bthList.set("폴라리스쉐어","POLA");
-    bthList.set("에이치닥","HDAC");
-    bthList.set("아이콘","ICX");
-    bthList.set("지엑스체인","GXC");
-    bthList.set("네스트리","EGG");
-    bthList.set("고머니2","GOM2");
-    bthList.set("애니버스","ANV");
-    bthList.set("디브이피","DVP");
-    bthList.set("플레타","FLETA");
-    bthList.set("퀴즈톡","QTCON");
-    bthList.set("보아","BOA");
-    bthList.set("더그래프","GRT");
-    bthList.set("비트코인다이아몬드","BCD");
-    bthList.set("알파체인","ARPA");
-    bthList.set("프레시움","PCM");
-    bthList.set("펑션엑스","FX");
-    bthList.set("어거","REP");
-    bthList.set("하이브","HIVE");
-    bthList.set("에프앤비프로토콜","FNB");
-    bthList.set("알고랜드","ALGO");
-    bthList.set("아이온","AION");
-    bthList.set("사이버베인","CVT");
-    bthList.set("코넌","CON");
-    bthList.set("월튼체인","WTC");
-    bthList.set("에이피엠코인","APM");
-    bthList.set("밸러토큰","VALOR");
-    bthList.set("세럼","SRM");
-    bthList.set("엠씨아이","MCI");
-    bthList.set("다드","DAD");
-    bthList.set("미러프로토콜","MIR");
-    bthList.set("코르텍스","CTXC");
-    bthList.set("아픽스","APIX");
-    bthList.set("소다코인","SOC");
-    bthList.set("젠서","XSR");
-    bthList.set("트러스트버스","TRV");
-    bthList.set("애터니티","AE");
-    bthList.set("스트라티스","STRAX");
-    bthList.set("신세틱스","SNX");
-    bthList.set("에이아이워크","AWO");
-    bthList.set("썬","SUN");
-    bthList.set("트루체인","TRUE");
-    bthList.set("에이브","AAVE");
-    bthList.set("머신익스체인지코인","MXC");
-    bthList.set("이마이너","EM");
-    bthList.set("센트럴리티","CENNZ");
-    bthList.set("위쇼토큰","WET");
-    bthList.set("브이시스템즈","VSYS");
-    bthList.set("루프링","LRC");
-    bthList.set("스시스왑","SUSHI");
-    bthList.set("컴파운드","COMP");
-    bthList.set("웨이키체인","WICC");
-    bthList.set("벨라프로토콜","BEL");
-    bthList.set("우마","UMA");
-    bthList.set("왐토큰","WOM");
-    bthList.set("타키온프로토콜","IPX");
-    bthList.set("타키온","IPX");
-    bthList.set("이포스","WOZX");
-    bthList.set("원루트네트워크","RNT");
-    bthList.set("맵프로토콜","MAP");
-    bthList.set("마일벌스","MVC");
-    
-const coin = {
-    "비트코인": {"symbol":"btc"},
-    "밀크": {"symbol":"mlk"},
-    "캔디 프로토콜": {"symbol":"cad"},
-    "비비": {"symbol":"vivi"},
-    "트라이엄프엑스": {"symbol":"trix"},
-    "더그래프": {"symbol":"grt"},
-    "토로커스": {"symbol":"torocus"},
-    "스시": {"symbol":"sushi"},
-    "퀸트북": {"symbol":"qtbk"},
-    "셀럽 플러스": {"symbol":"celeb"},
-    "크립토뱅크": {"symbol":"cbank"},
-    "리니어 파이낸스": {"symbol":"lina"},
-    "아발란체": {"symbol":"avax"},
-    "베이직": {"symbol":"basic"},
-    "도니 파이낸스": {"symbol":"don"},
-    "두카토": {"symbol":"ducato"},
-    "메티스": {"symbol":"mts"},
-    "인젝티브 프로토콜": {"symbol":"inj"},
-    "핸디": {"symbol":"handy"},
-    "엑시 인피니티": {"symbol":"axs"},
-    "비트코인 캐시 에이비씨": {"symbol":"bcha"},
-    "비엠피": {"symbol":"bmp"},
-    "디비전": {"symbol":"dvi"},
-    "피카": {"symbol":"pica"},
-    "마일벌스": {"symbol":"mvc"},
-    "벨라 프로토콜": {"symbol":"bel"},
-    "비에프코인": {"symbol":"bfc"},
-    "알파 파이낸스 랩": {"symbol":"alpha"},
-    "티엠씨": {"symbol":"tmc"},
-    "테넷": {"symbol":"ten"},
-    "디아": {"symbol":"dia"},
-    "스와이프": {"symbol":"sxp"},
-    "쿠사마": {"symbol":"ksm"},
-    "타키온 프로토콜": {"symbol":"ipx"},
-    "브이시스템즈": {"symbol":"vsys"},
-    "에프티엑스 토큰": {"symbol":"ftt"},
-    "맵 프로토콜": {"symbol":"map"},
-    "비지엑스 프로토콜": {"symbol":"bzrx"},
-    "오니엑스": {"symbol":"onx"},
-    "네스트 프로토콜": {"symbol":"nest"},
-    "카르디아체인": {"symbol":"kai"},
-    "커브": {"symbol":"crv"},
-    "도도": {"symbol":"dodo"},
-    "우마": {"symbol":"uma"},
-    "더마이다스터치골드": {"symbol":"tmtg"},
-    "하드 프로토콜": {"symbol":"hard"},
-    "저스트": {"symbol":"jst"},
-    "쇼고": {"symbol":"show"},
-    "고머니2": {"symbol":"gom2"},
-    "페치": {"symbol":"fet"},
-    "미콘캐시": {"symbol":"mch"},
-    "체인링크": {"symbol":"link"},
-    "콘텐토스": {"symbol":"cos"},
-        "럭스 바이오": {"symbol":"lbxc"},
-    "아이스타더스트": {"symbol":"isdt"},
-    "오리진 프로토콜": {"symbol":"ogn"},
-    "발란서": {"symbol":"bal"},
-    "판테온X": {"symbol":"xpn"},
-    "오로라": {"symbol":"aoa"},
-    "케이브이아이": {"symbol":"kvi"},
-    "옵저버": {"symbol":"obsr"},
-    "아이오텍스": {"symbol":"iotx"},
-    "두드림체인": {"symbol":"drm"},
-   "무비블록": {"symbol":"mbl"},
-    "미스블록": {"symbol":"msb"},
-    "바스아이디": {"symbol":"baas"},
-    "울트라": {"symbol":"uos"},
-    "테라 KRT": {"symbol":"krt"},
-    "카바": {"symbol":"kava"},
-    "알파 체인": {"symbol":"arpa"},
-    "미네랄": {"symbol":"mnr"},
-    "휴먼스케이프": {"symbol":"hum"},
-    "소다코인": {"symbol":"soc"},
-    "메타": {"symbol":"mta"},
-    "바나나톡": {"symbol":"bna"},
-    "스테이크": {"symbol":"stake"},
-    "케이스타라이브": {"symbol":"ksc"},
-    "엔에프유피": {"symbol":"nfup"},
-    "레디": {"symbol":"redi"},
-    "디알씨 모빌리티": {"symbol":"drc"},
-    "바운스 토큰": {"symbol":"bot"},
-    "에어블록": {"symbol":"abl"},
-    "스트림 프로토콜": {"symbol":"stpl"},
-    "플레타": {"symbol":"fleta"},
-    "밴드 프로토콜": {"symbol":"band"},
-    "베이직어텐션토큰": {"symbol":"bat"},
-    "에이아이피": {"symbol":"aip"},
-    "네오": {"symbol":"neo"},
-    "오브스": {"symbol":"orbs"},
-    "어셈블 프로토콜": {"symbol":"asm"},
-    "다드": {"symbol":"dad"},
-    "힌트체인": {"symbol":"hint"},
-    "네스트리": {"symbol":"egg"},
-    "에스티피": {"symbol":"stpt"},
-    "아모코인": {"symbol":"amo"},
-    "신세틱스 네트워크 토큰": {"symbol":"snx"},
-    "트리클": {"symbol":"trcl"},
-    "킹디에이쥐": {"symbol":"kdag"},
-    "토모체인": {"symbol":"tomoe"},
-    "비트코인사토시비전": {"symbol":"bsv"},
-    "캠프코인": {"symbol":"camp"},
-    "폴카닷": {"symbol":"dot"},
-    "픽셀": {"symbol":"pxl"},
-    "스텔라루멘": {"symbol":"xlm"},
-    "온톨로지가스": {"symbol":"ong"},
-    "템코": {"symbol":"temco"},
-    "클라우드브릭": {"symbol":"clb"},
-    "데리벡스": {"symbol":"dvx"},
-    "썬": {"symbol":"sun"},
-    "오미세고 네트워크": {"symbol":"omg"},
-    "비트코인 골드": {"symbol":"btg"},
-    "트론": {"symbol":"trx"},
-    "라탐캐시": {"symbol":"lmch"},
-    "라이트코인": {"symbol":"ltc"},
-    "퀴즈톡": {"symbol":"qtcon"},
-    "모티브": {"symbol":"mov"},
-    "퓨리에버": {"symbol":"pure"},
-    "이오스": {"symbol":"eos"},
-    "루넥스": {"symbol":"rnx"},
-       "스트리머": {"symbol":"data"},
-    "톰 파이낸스": {"symbol":"tom"},
-    "8X8 프로토콜": {"symbol":"exe"},
-    "아스타": {"symbol":"asta"},
-    "제로엑스": {"symbol":"zrx"},
-    "아이비피 토큰": {"symbol":"ibp"},
-    "카이버": {"symbol":"knc"},
-    "코스모스아톰": {"symbol":"atom"},
-    "앵커 네트워크": {"symbol":"ankr"},
-    "팁": {"symbol":"tip"},
-    "테조스": {"symbol":"xtz"},
-    "리플": {"symbol":"xrp"},
-    "이더리움": {"symbol":"eth"},
-    "위드": {"symbol":"wiken"},    
-    "라운지엠": {"symbol":"lzm"},
-    "아튜브": {"symbol":"att"},
-    "포도": {"symbol":"pod"},
-    "러쉬 코인": {"symbol":"rush"},
-    "프롬카": {"symbol":"fcr"},
-    "오르빗체인": {"symbol":"orc"},
-    "너보스": {"symbol":"ckb"},
-    "카르테시": {"symbol":"ctsi"},
-    "식스": {"symbol":"six"},
-    "컴파운드": {"symbol":"comp"},
-    "보라": {"symbol":"bora"},
-    "폴스타코인": {"symbol":"psc"},
-    "프로메테우스": {"symbol":"prom"},
-    "피블": {"symbol":"pib"},
-    "가스": {"symbol":"gas"},
-    "폴리곤": {"symbol":"matic"},
-    "비트토렌트": {"symbol":"btt"},
-    "루아 토큰": {"symbol":"lua"},
-    "질리카": {"symbol":"zil"},
-    "엑시얼": {"symbol":"axl"},
-    "비트코인 캐시": {"symbol":"bch"},
-    "1인치": {"symbol":"1inch"},
-    "코박 토큰": {"symbol":"cbk"},
-    "클레이스왑": {"symbol":"ksp"},
-    "미러 프로토콜": {"symbol":"mir"},
-    "프론티어": {"symbol":"front"},
-    "세럼": {"symbol":"srm"},
-    "겟 프로토콜": {"symbol":"get"},
-    "클레이튼": {"symbol":"klay"},
-    "방코르": {"symbol":"bnt"},
-    "페이코인": {"symbol":"pci"},
-    "에이브": {"symbol":"aave"},
-    "에스클레이": {"symbol":"sklay"},
-    "에이다": {"symbol":"ada"},
-    "아이오타": {"symbol":"iota"},
-    "렌": {"symbol":"ren"},
-    "퀀텀": {"symbol":"qtum"},
-    "온톨로지": {"symbol":"ont"},
-    "이더리움 클래식": {"symbol":"etc"},
-    "루나": {"symbol":"luna"},
-    "바이오패스포트": {"symbol":"biot"},
-    "이다볼 네트워크": {"symbol":"idv"},
-    "인슈어리움": {"symbol":"isr"},
-    "파일코인": {"symbol":"fil"},
-    "힙스": {"symbol":"hibs"},
-    "유니스왑": {"symbol":"uni"}
-};
-    
-   /*////////////////////////////////////
-  핵심 response 함수입니다.
-  histort - 유한빈 20210326 최초제작
-        -
+bthList.set("메이커", "MKR");
+bthList.set("앵커뉴럴월드", "ANW");
+bthList.set("제노토큰", "XNO");
+bthList.set("템코", "TEMCO");
+bthList.set("크로미아", "CHR");
+bthList.set("오르빗체인", "ORC");
+bthList.set("콘텐토스", "COS");
+bthList.set("드레곤베인", "DVC");
+bthList.set("아모코인", "AMO");
+bthList.set("오로라", "AOA");
+bthList.set("엘리시아", "EL");
+bthList.set("300피트네트워크", "FIT");
+bthList.set("어댑터토큰", "ADP");
+bthList.set("이브이지", "EVG");
+bthList.set("더마이다스터치골드", "TMTG");
+bthList.set("옵저버", "OBSR");
+bthList.set("연파이낸스", "YFI");
+bthList.set("리니어파이낸스", "LINA");
+bthList.set("프로톤", "XPR");
+bthList.set("바이오패스포트", "BIOT");
+bthList.set("믹스마블", "MIX");
+bthList.set("다빈치", "DAC");
+bthList.set("퀸비", "QBZ");
+bthList.set("버거스왑", "BURGER");
+bthList.set("위믹스", "WEMIX");
+bthList.set("밀리미터토큰", "MM");
+bthList.set("폴라리스쉐어", "POLA");
+bthList.set("에이치닥", "HDAC");
+bthList.set("아이콘", "ICX");
+bthList.set("지엑스체인", "GXC");
+bthList.set("네스트리", "EGG");
+bthList.set("고머니2", "GOM2");
+bthList.set("애니버스", "ANV");
+bthList.set("디브이피", "DVP");
+bthList.set("플레타", "FLETA");
+bthList.set("퀴즈톡", "QTCON");
+bthList.set("보아", "BOA");
+bthList.set("더그래프", "GRT");
+bthList.set("비트코인다이아몬드", "BCD");
+bthList.set("알파체인", "ARPA");
+bthList.set("프레시움", "PCM");
+bthList.set("펑션엑스", "FX");
+bthList.set("어거", "REP");
+bthList.set("하이브", "HIVE");
+bthList.set("에프앤비프로토콜", "FNB");
+bthList.set("알고랜드", "ALGO");
+bthList.set("아이온", "AION");
+bthList.set("사이버베인", "CVT");
+bthList.set("코넌", "CON");
+bthList.set("월튼체인", "WTC");
+bthList.set("에이피엠코인", "APM");
+bthList.set("밸러토큰", "VALOR");
+bthList.set("세럼", "SRM");
+bthList.set("엠씨아이", "MCI");
+bthList.set("다드", "DAD");
+bthList.set("미러프로토콜", "MIR");
+bthList.set("코르텍스", "CTXC");
+bthList.set("아픽스", "APIX");
+bthList.set("소다코인", "SOC");
+bthList.set("젠서", "XSR");
+bthList.set("트러스트버스", "TRV");
+bthList.set("애터니티", "AE");
+bthList.set("스트라티스", "STRAX");
+bthList.set("신세틱스", "SNX");
+bthList.set("에이아이워크", "AWO");
+bthList.set("썬", "SUN");
+bthList.set("트루체인", "TRUE");
+bthList.set("에이브", "AAVE");
+bthList.set("머신익스체인지코인", "MXC");
+bthList.set("이마이너", "EM");
+bthList.set("센트럴리티", "CENNZ");
+bthList.set("위쇼토큰", "WET");
+bthList.set("브이시스템즈", "VSYS");
+bthList.set("루프링", "LRC");
+bthList.set("스시스왑", "SUSHI");
+bthList.set("컴파운드", "COMP");
+bthList.set("웨이키체인", "WICC");
+bthList.set("벨라프로토콜", "BEL");
+bthList.set("우마", "UMA");
+bthList.set("왐토큰", "WOM");
+bthList.set("타키온프로토콜", "IPX");
+bthList.set("타키온", "IPX");
+bthList.set("이포스", "WOZX");
+bthList.set("원루트네트워크", "RNT");
+bthList.set("맵프로토콜", "MAP");
+bthList.set("마일벌스", "MVC");
+
+/*////////////////////////////////////
+핵심 response 함수입니다.
+histort - 유한빈 20210326 최초제작
+     -
 ////////////////////////////////////*/
 function response(
     room,
@@ -298,56 +116,56 @@ function response(
     ImageDB,
     packageName
 ) {
-   // 방 체크
+    // 방 체크
     if (arr_room.indexOf(room) == -1) {
         return false;
-    } 
-   // 메시지 좌우 공백제거
+    }
+    // 메시지 좌우 공백제거
     msg.trim();
-   
+
     var command = msg.split(" ")[0]; // 명령어 캐치
     var KRname = msg.split(" ")[1]; // 파라미터 값
-   
+
     /*
    author : 유한빈
    history : 최초제작 - 20210326
    */
     if (command == "?코인") {
-      
+
         var market;
-          var coin;
-                bthList.forEach(function(value, key) {
-    		      if(key.includes(KRname)){
-    			        coin = value;
-               
-      	  		    return;
-    		      }
-    	    })
-        
-        
-      
-      
-        if(coin == null){
-          replier.reply("해당 코인은 존재하지 않습니다.");
-          return;
+        var coin;
+        bthList.forEach(function (value, key) {
+            if (key.includes(KRname)) {
+                coin = value;
+
+                return;
+            }
+        })
+
+
+
+
+        if (coin == null) {
+            replier.reply("해당 코인은 존재하지 않습니다.");
+            return;
         }
-       /* 
-        var coin_info = Utils.getWebText(
-            "https://api.coinone.co.kr/ticker?currency="+market
-        );
-        
-        var coin_info_json = coin_info.replace(/(<([^>]+)>)/gi, "").trim();
-        //replier.reply(coin_info_json);
-          //return;*/
-          if(coin=="MAP"){
-            coin = coin+"_BTC";
-          }
-              
-          const coin_info_obj = JSON.parse(Utils.parse("https://api.bithumb.com/public/ticker/"+coin).body().text());//JSON.parse(coin_info_json);
-            
-          
-      
-          
+        /* 
+         var coin_info = Utils.getWebText(
+             "https://api.coinone.co.kr/ticker?currency="+market
+         );
+         
+         var coin_info_json = coin_info.replace(/(<([^>]+)>)/gi, "").trim();
+         //replier.reply(coin_info_json);
+           //return;*/
+        if (coin == "MAP") {
+            coin = coin + "_BTC";
+        }
+
+        const coin_info_obj = JSON.parse(Utils.parse("https://api.bithumb.com/public/ticker/" + coin).body().text());//JSON.parse(coin_info_json);
+
+
+
+
         var dollar = "";
         if (market == "btc") {
             var coin_info_dollar = Utils.getWebText(
@@ -360,13 +178,13 @@ function response(
             dollar = coin_info_obj_dollar.lastPrice;
 
             var ExRate = Utils.getWebText(
-                    "https://api.exchangeratesapi.io/latest?symbols=USD,KRW&base=USD"
-                )
+                "https://api.exchangeratesapi.io/latest?symbols=USD,KRW&base=USD"
+            )
                 .replace(/(<([^>]+)>)/gi, "")
                 .trim();
-                           var Rate = parseFloat(ExRate.split(":")[2].split(",")[0]);
+            var Rate = parseFloat(ExRate.split(":")[2].split(",")[0]);
 
-             replier.reply(
+            replier.reply(
                 "[" + name + "]\n" +
                 "￦ " + numberWithCommas(parseFloat(coin_info_obj.last)) +
                 "\n＄ " + numberWithCommas(parseFloat(dollar)) +
@@ -374,8 +192,8 @@ function response(
                     100).toFixed(2) + "%)" +
                 "\n\n고가: " + numberWithCommas(parseFloat(coin_info_obj.high)) +
                 "\n저가: " + numberWithCommas(parseFloat(coin_info_obj.low)) +
-                "\n변동: " + numberWithCommas(parseInt(coin_info_obj.yesterday_last-coin_info_obj.last)) +
-                "(" + parseFloat((coin_info_obj.yesterday_last-coin_info_obj.last) / coin_info_obj.last * 100).toFixed(2) + "%)"
+                "\n변동: " + numberWithCommas(parseInt(coin_info_obj.yesterday_last - coin_info_obj.last)) +
+                "(" + parseFloat((coin_info_obj.yesterday_last - coin_info_obj.last) / coin_info_obj.last * 100).toFixed(2) + "%)"
             );
             //{"status":"0000","data":{"opening_price":"398.4","closing_price":"417.5","min_price":"366.7",
             //"max_price":"424.8","units_traded":"4042189.21285505","acc_trade_value":"1575366243.0355",
@@ -383,18 +201,18 @@ function response(
             //"acc_trade_value_24H":"1690600225.8864","fluctate_24H":"15.5","fluctate_rate_24H":"3.86","date":"1617198801837"}}
             return;
         }
-        if(coin=="MAP_BTC"){
+        if (coin == "MAP_BTC") {
             replier.reply(
-            "[" +
-            "맵 프로토콜" +
-            "]\n" +
-            "₿ : " + parseFloat(coin_info_obj.data.closing_price) +
-            "\n고가: " + parseFloat(coin_info_obj.data.max_price) +
-            "\n저가: " + parseFloat(coin_info_obj.data.min_price) +
-            "\n변동: " + parseFloat(coin_info_obj.data.closing_price-coin_info_obj.data.prev_closing_price).toFixed(8) +
-            "(" + parseFloat((coin_info_obj.data.closing_price-coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100).toFixed(2) + "%)"
-          );
-          return;
+                "[" +
+                "맵 프로토콜" +
+                "]\n" +
+                "₿ : " + parseFloat(coin_info_obj.data.closing_price) +
+                "\n고가: " + parseFloat(coin_info_obj.data.max_price) +
+                "\n저가: " + parseFloat(coin_info_obj.data.min_price) +
+                "\n변동: " + parseFloat(coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price).toFixed(8) +
+                "(" + parseFloat((coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100).toFixed(2) + "%)"
+            );
+            return;
         }
         replier.reply(
             "[" +
@@ -403,15 +221,15 @@ function response(
             "￦ " + numberWithCommas(parseFloat(coin_info_obj.data.closing_price)) +
             "\n고가: " + numberWithCommas(parseFloat(coin_info_obj.data.max_price)) +
             "\n저가: " + numberWithCommas(parseFloat(coin_info_obj.data.min_price)) +
-            "\n변동: " + numberWithCommas(parseFloat(coin_info_obj.data.closing_price-coin_info_obj.data.prev_closing_price).toFixed(2)) +
-            "(" + parseFloat((coin_info_obj.data.closing_price-coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100).toFixed(2) + "%)"
+            "\n변동: " + numberWithCommas(parseFloat(coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price).toFixed(2)) +
+            "(" + parseFloat((coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100).toFixed(2) + "%)"
         );
 
     }
-      /*
-   author : 오태윤
-   history : 최초제작 - 20210325
-   */
+    /*
+ author : 오태윤
+ history : 최초제작 - 20210325
+ */
     if (command == "&익절") {
 
         if (msg.split(" ").length > 2) {
@@ -467,7 +285,7 @@ function response(
         }
         replier.reply(result);
     }
-    }
+}
 /*////////////////////////////////////
   3자리마다 콤마를 찍는 함수
   histort - 유한빈 20210326 최초제작
@@ -513,21 +331,21 @@ function isNumeric(num, opt) {
   histort - 권민재 20210326 최초제작
         -
 ////////////////////////////////////*/
-function floating2fixed(trade_price){
-    if(!isNumeric(trade_price)){
+function floating2fixed(trade_price) {
+    if (!isNumeric(trade_price)) {
         var sp_trade_price = trade_price.split("E");
         var floating = sp_trade_price[0];
         var exponential = sp_trade_price[1];
         var add_e = 0;
-        if(floating.indexOf(".") != -1){
+        if (floating.indexOf(".") != -1) {
             add_e = floating.split(".")[1].toString().length;
         }
-        return Number(trade_price).toFixed(Math.abs(exponential)+Number(add_e));
-    }else{
+        return Number(trade_price).toFixed(Math.abs(exponential) + Number(add_e));
+    } else {
         return trade_price;
     }
-}    
-            
+}
+
 /**
  * (string) room
  * (string) sender
@@ -537,32 +355,32 @@ function floating2fixed(trade_price){
  * (string) imageDB.getProfileBase64()
  * (string) packageName
  */
- /*
+/*
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
-  
+ 
 }
 
 */
 //아래 4개의 메소드는 액티비티 화면을 수정할때 사용됩니다.
 function onCreate(savedInstanceState, activity) {
-  var textView = new android.widget.TextView(activity);
-  textView.setText("Hello, World!");
-  textView.setTextColor(android.graphics.Color.DKGRAY);
-  activity.setContentView(textView);
+    var textView = new android.widget.TextView(activity);
+    textView.setText("Hello, World!");
+    textView.setTextColor(android.graphics.Color.DKGRAY);
+    activity.setContentView(textView);
 }
 
 //아래 4개의 메소드는 액티비티 화면을 수정할때 사용됩니다.
 function onCreate(savedInstanceState, activity) {
-  var textView = new android.widget.TextView(activity);
-  textView.setText("Hello, World!");
-  textView.setTextColor(android.graphics.Color.DKGRAY);
-  activity.setContentView(textView);
+    var textView = new android.widget.TextView(activity);
+    textView.setText("Hello, World!");
+    textView.setTextColor(android.graphics.Color.DKGRAY);
+    activity.setContentView(textView);
 }
 
-function onStart(activity) {}
+function onStart(activity) { }
 
-function onResume(activity) {}
+function onResume(activity) { }
 
-function onPause(activity) {}
+function onPause(activity) { }
 
-function onStop(activity) {}
+function onStop(activity) { }
