@@ -787,7 +787,7 @@ function exRate(){
   3자리마다 콤마를 찍는 함수
   histort - 유한빈 20210326 최초제작
         -
-////////////////////////////////////*/
+  ////////////////////////////////////*/
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -821,25 +821,5 @@ function isNumeric(num, opt) {
         return isNaN(num) ? false : true;
     } else {
         return false;
-    }
-}
-
-/*////////////////////////////////////
-  부동소수점을 고정소수점으로 바꿈
-  histort - 권민재 20210326 최초제작
-        -
-////////////////////////////////////*/
-function floating2fixed(trade_price){
-    if(!isNumeric(trade_price)){
-        var sp_trade_price = trade_price.split("E");
-        var floating = sp_trade_price[0];
-        var exponential = sp_trade_price[1];
-        var add_e = 0;
-        if(floating.indexOf(".") != -1){
-            add_e = floating.split(".")[1].toString().length;
-        }
-        return Number(trade_price).toFixed(Math.abs(exponential)+Number(add_e));
-    }else{
-        return trade_price;
     }
 }
