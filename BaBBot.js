@@ -281,135 +281,135 @@ var coin_list_by_market = {
         "파일코인": { "symbol": "fil" },
         "힙스": { "symbol": "hibs" },
         "유니스왑": { "symbol": "uni" }
+    },
+    "bithumb":{
+        "메이커": { "symbol": "MKR" },
+        "앵커뉴럴월드": { "symbol": "ANW" },
+        "제노토큰": { "symbol": "XNO" },
+        "템코": { "symbol": "TEMCO" },
+        "크로미아": { "symbol": "CHR" },
+        "오르빗체인": { "symbol": "ORC" },
+        "콘텐토스": { "symbol": "COS" },
+        "드레곤베인": { "symbol": "DVC" },
+        "아모코인": { "symbol": "AMO" },
+        "오로라": { "symbol": "AOA" },
+        "엘리시아": { "symbol": "EL" },
+        "300피트네트워크": { "symbol": "FIT" },
+        "어댑터토큰": { "symbol": "ADP" },
+        "이브이지": { "symbol": "EVG" },
+        "더마이다스터치골드": { "symbol": "TMTG" },
+        "옵저버": { "symbol": "OBSR" },
+        "연파이낸스": { "symbol": "YFI" },
+        "리니어파이낸스": { "symbol": "LINA" },
+        "프로톤": { "symbol": "XPR" },
+        "바이오패스포트": { "symbol": "BIOT" },
+        "믹스마블": { "symbol": "MIX" },
+        "다빈치": { "symbol": "DAC" },
+        "퀸비": { "symbol": "QBZ" },
+        "버거스왑": { "symbol": "BURGER" },
+        "위믹스": { "symbol": "WEMIX" },
+        "밀리미터토큰": { "symbol": "MM" },
+        "폴라리스쉐어": { "symbol": "POLA" },
+        "에이치닥": { "symbol": "HDAC" },
+        "아이콘": { "symbol": "ICX" },
+        "지엑스체인": { "symbol": "GXC" },
+        "네스트리": { "symbol": "EGG" },
+        "고머니2": { "symbol": "GOM2" },
+        "애니버스": { "symbol": "ANV" },
+        "디브이피": { "symbol": "DVP" },
+        "플레타": { "symbol": "FLETA" },
+        "퀴즈톡": { "symbol": "QTCON" },
+        "보아": { "symbol": "BOA" },
+        "더그래프": { "symbol": "GRT" },
+        "비트코인다이아몬드": { "symbol": "BCD" },
+        "알파체인": { "symbol": "ARPA" },
+        "프레시움": { "symbol": "PCM" },
+        "펑션엑스": { "symbol": "FX" },
+        "어거": { "symbol": "REP" },
+        "하이브": { "symbol": "HIVE" },
+        "에프앤비프로토콜": { "symbol": "FNB" },
+        "알고랜드": { "symbol": "ALGO" },
+        "아이온": { "symbol": "AION" },
+        "사이버베인": { "symbol": "CVT" },
+        "코넌": { "symbol": "CON" },
+        "월튼체인": { "symbol": "WTC" },
+        "에이피엠코인": { "symbol": "APM" },
+        "밸러토큰": { "symbol": "VALOR" },
+        "세럼": { "symbol": "SRM" },
+        "엠씨아이": { "symbol": "MCI" },
+        "다드": { "symbol": "DAD" },
+        "미러프로토콜": { "symbol": "MIR" },
+        "코르텍스": { "symbol": "CTXC" },
+        "아픽스": { "symbol": "APIX" },
+        "소다코인": { "symbol": "SOC" },
+        "젠서": { "symbol": "XSR" },
+        "트러스트버스": { "symbol": "TRV" },
+        "애터니티": { "symbol": "AE" },
+        "스트라티스": { "symbol": "STRAX" },
+        "신세틱스": { "symbol": "SNX" },
+        "에이아이워크": { "symbol": "AWO" },
+        "썬": { "symbol": "SUN" },
+        "트루체인": { "symbol": "TRUE" },
+        "에이브": { "symbol": "AAVE" },
+        "머신익스체인지코인": { "symbol": "MXC" },
+        "이마이너": { "symbol": "EM" },
+        "센트럴리티": { "symbol": "CENNZ" },
+        "위쇼토큰": { "symbol": "WET" },
+        "브이시스템즈": { "symbol": "VSYS" },
+        "루프링": { "symbol": "LRC" },
+        "스시스왑": { "symbol": "SUSHI" },
+        "컴파운드": { "symbol": "COMP" },
+        "웨이키체인": { "symbol": "WICC" },
+        "벨라프로토콜": { "symbol": "BEL" },
+        "우마": { "symbol": "UMA" },
+        "왐토큰": { "symbol": "WOM" },
+        "타키온프로토콜": { "symbol": "IPX" },
+        "타키온": { "symbol": "IPX" },
+        "이포스": { "symbol": "WOZX" },
+        "원루트네트워크": { "symbol": "RNT" },
+        "라이파이낸스": { "symbol": "RAI" }
+    },
+    flat: {
+        "비트코인": { "symbol": "BTC/KRW" },
+        "이더리움": { "symbol": "ETH/KRW" },
+        "커넥션": { "symbol": "CNT/KRW" },
+        "밀리미터": { "symbol": "MM/KRW" },
+        "빌드업": { "symbol": "BUP/KRW" },
+        "리플": { "symbol": "XRP/KRW" },
+        "성공": { "symbol": "BS/KRW" },
+        "블랍스코인": { "symbol": "BLC/KRW" },
+        "큐피바이오": { "symbol": "BIO/KRW" },
+        "엔진엔코인": { "symbol": "NZC/KRW" },
+        "레이븐코인": { "symbol": "RVN/KRW" },
+        "다인": { "symbol": "DAIN/KRW" },
+        "다판다": { "symbol": "DPD/KRW" },
+        "밋토큰": { "symbol": "MTT/KRW" },
+        "힐링플러스": { "symbol": "HP/KRW" },
+        "타미토큰": { "symbol": "TMT/KRW" },
+        "비엘": { "symbol": "BL/KRW" },
+        "키보드토큰": { "symbol": "KEYT/KRW" },
+        "지에셋": { "symbol": "GASSET/KRW" },
+        "하이젠": { "symbol": "HGN/KRW" },
+        "해시팟": { "symbol": "HPOT/KRW" },
+        "퀸텟": { "symbol": "QTC/KRW" },
+        "크립토워리어즈": { "symbol": "CZ/KRW" },
+        "벨류에셋": { "symbol": "VAX/KRW" },
+        "센터코인": { "symbol": "CENT/KRW" },
+        "패스토큰": { "symbol": "PTX/KRW" },
+        "오케이션": { "symbol": "OCN/KRW" },
+        "델타체인": { "symbol": "DTC/KRW" },
+        "세인트웨이토큰": { "symbol": "SNT/KRW" },
+        "쇼잉": { "symbol": "SHOW/KRW" },
+        "코메오": { "symbol": "COMEO/KRW" },
+        "크립토엔뱅크": { "symbol": "xCnBn/KRW" },
+        "글루오스": { "symbol": "GLU/KRW" },
+        "트루리퀴드": { "symbol": "TL/KRW" },
+        "업카": { "symbol": "UPC/KRW" },
+        "펫코노미": { "symbol": "PETCO/KRW" },
+        "KRWG": { "symbol": "KRWG/KRW" },
+        "디바": { "symbol": "DIBA/KRW" }
     }
 };
-
-const bthList = new Map();
-bthList.set("메이커", "MKR");
-bthList.set("앵커뉴럴월드", "ANW");
-bthList.set("제노토큰", "XNO");
-bthList.set("템코", "TEMCO");
-bthList.set("크로미아", "CHR");
-bthList.set("오르빗체인", "ORC");
-bthList.set("콘텐토스", "COS");
-bthList.set("드레곤베인", "DVC");
-bthList.set("아모코인", "AMO");
-bthList.set("오로라", "AOA");
-bthList.set("엘리시아", "EL");
-bthList.set("300피트네트워크", "FIT");
-bthList.set("어댑터토큰", "ADP");
-bthList.set("이브이지", "EVG");
-bthList.set("더마이다스터치골드", "TMTG");
-bthList.set("옵저버", "OBSR");
-bthList.set("연파이낸스", "YFI");
-bthList.set("리니어파이낸스", "LINA");
-bthList.set("프로톤", "XPR");
-bthList.set("바이오패스포트", "BIOT");
-bthList.set("믹스마블", "MIX");
-bthList.set("다빈치", "DAC");
-bthList.set("퀸비", "QBZ");
-bthList.set("버거스왑", "BURGER");
-bthList.set("위믹스", "WEMIX");
-bthList.set("밀리미터토큰", "MM");
-bthList.set("폴라리스쉐어", "POLA");
-bthList.set("에이치닥", "HDAC");
-bthList.set("아이콘", "ICX");
-bthList.set("지엑스체인", "GXC");
-bthList.set("네스트리", "EGG");
-bthList.set("고머니2", "GOM2");
-bthList.set("애니버스", "ANV");
-bthList.set("디브이피", "DVP");
-bthList.set("플레타", "FLETA");
-bthList.set("퀴즈톡", "QTCON");
-bthList.set("보아", "BOA");
-bthList.set("더그래프", "GRT");
-bthList.set("비트코인다이아몬드", "BCD");
-bthList.set("알파체인", "ARPA");
-bthList.set("프레시움", "PCM");
-bthList.set("펑션엑스", "FX");
-bthList.set("어거", "REP");
-bthList.set("하이브", "HIVE");
-bthList.set("에프앤비프로토콜", "FNB");
-bthList.set("알고랜드", "ALGO");
-bthList.set("아이온", "AION");
-bthList.set("사이버베인", "CVT");
-bthList.set("코넌", "CON");
-bthList.set("월튼체인", "WTC");
-bthList.set("에이피엠코인", "APM");
-bthList.set("밸러토큰", "VALOR");
-bthList.set("세럼", "SRM");
-bthList.set("엠씨아이", "MCI");
-bthList.set("다드", "DAD");
-bthList.set("미러프로토콜", "MIR");
-bthList.set("코르텍스", "CTXC");
-bthList.set("아픽스", "APIX");
-bthList.set("소다코인", "SOC");
-bthList.set("젠서", "XSR");
-bthList.set("트러스트버스", "TRV");
-bthList.set("애터니티", "AE");
-bthList.set("스트라티스", "STRAX");
-bthList.set("신세틱스", "SNX");
-bthList.set("에이아이워크", "AWO");
-bthList.set("썬", "SUN");
-bthList.set("트루체인", "TRUE");
-bthList.set("에이브", "AAVE");
-bthList.set("머신익스체인지코인", "MXC");
-bthList.set("이마이너", "EM");
-bthList.set("센트럴리티", "CENNZ");
-bthList.set("위쇼토큰", "WET");
-bthList.set("브이시스템즈", "VSYS");
-bthList.set("루프링", "LRC");
-bthList.set("스시스왑", "SUSHI");
-bthList.set("컴파운드", "COMP");
-bthList.set("웨이키체인", "WICC");
-bthList.set("벨라프로토콜", "BEL");
-bthList.set("우마", "UMA");
-bthList.set("왐토큰", "WOM");
-bthList.set("타키온프로토콜", "IPX");
-bthList.set("타키온", "IPX");
-bthList.set("이포스", "WOZX");
-bthList.set("원루트네트워크", "RNT");
-bthList.set("라이파이낸스", "RAI");
-
-const flatList = new Map();
-flatList.set("비트코인", "BTC/KRW");
-flatList.set("이더리움", "ETH/KRW");
-flatList.set("커넥션", "CNT/KRW");
-flatList.set("밀리미터", "MM/KRW");
-flatList.set("빌드업", "BUP/KRW");
-flatList.set("리플", "XRP/KRW");
-flatList.set("성공", "BS/KRW");
-flatList.set("블랍스코인", "BLC/KRW");
-flatList.set("큐피바이오", "BIO/KRW");
-flatList.set("엔진엔코인", "NZC/KRW");
-flatList.set("레이븐코인", "RVN/KRW");
-flatList.set("다인", "DAIN/KRW");
-flatList.set("다판다", "DPD/KRW");
-flatList.set("밋토큰", "MTT/KRW");
-flatList.set("힐링플러스", "HP/KRW");
-flatList.set("타미토큰", "TMT/KRW");
-flatList.set("비엘", "BL/KRW");
-flatList.set("키보드토큰", "KEYT/KRW");
-flatList.set("지에셋", "GASSET/KRW");
-flatList.set("하이젠", "HGN/KRW");
-flatList.set("해시팟", "HPOT/KRW");
-flatList.set("퀸텟", "QTC/KRW");
-flatList.set("크립토워리어즈", "CZ/KRW");
-flatList.set("벨류에셋", "VAX/KRW");
-flatList.set("센터코인", "CENT/KRW");
-flatList.set("패스토큰", "PTX/KRW");
-flatList.set("오케이션", "OCN/KRW");
-flatList.set("델타체인", "DTC/KRW");
-flatList.set("세인트웨이토큰", "SNT/KRW");
-flatList.set("쇼잉", "SHOW/KRW");
-flatList.set("코메오", "COMEO/KRW");
-flatList.set("크립토엔뱅크", "xCnBn/KRW");
-flatList.set("글루오스", "GLU/KRW");
-flatList.set("트루리퀴드", "TL/KRW");
-flatList.set("업카", "UPC/KRW");
-flatList.set("펫코노미", "PETCO/KRW");
-flatList.set("KRWG", "KRWG/KRW");
-flatList.set("디바", "DIBA/KRW");
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
     if (arr_room.indexOf(room) == -1) {
@@ -450,12 +450,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             if (market_name == "upbit") {
                 //upbit에는 코인 리스트 가져오는 api가 있음
                 coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
-            } else if (market_name == "bithumb") {
-                coin_list_obj = bthList;
-            } else if (market_name == "flat") {
-                coin_list_obj = flatList;
-            }
-            else {
+            } else {
                 //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
                 coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
             }
@@ -581,8 +576,8 @@ function coin_check(market_name, value, coin_list_obj) {
             }
         }
         /**************************************** 업비트 ********************************************/
-    } else if (market_name == "coinone") {
-        /**************************************** 코인원 ********************************************/
+    } else {
+        /**************************************** other ********************************************/
         if (coin_list_obj.hasOwnProperty(value)) {
             name = value;
             symbol = coin_list_obj[value].symbol;
@@ -595,27 +590,7 @@ function coin_check(market_name, value, coin_list_obj) {
                 }
             }
         }
-        /**************************************** 코인원 ********************************************/
-    } else if (market_name == "bithumb") {
-        /**************************************** 빗썸 ********************************************/
-        coin_list_obj.forEach(function (val, key) {
-            if (key.includes(value)) {
-                symbol = val;
-                name = key;
-                return;
-            }
-        });
-        /**************************************** 빗썸 ********************************************/
-    } else if (market_name == "flat") {
-        /**************************************** 플랫타 ********************************************/
-        coin_list_obj.forEach(function (val, key) {
-            if (key.includes(value)) {
-                symbol = val;
-                name = key;
-                return;
-            }
-        });
-        /**************************************** 플랫타 ********************************************/
+        /**************************************** other ********************************************/
     }
 
     if (name != null || symbol != null) {
