@@ -6,7 +6,7 @@
 const arr_room = ["민재", "BOT", "랩실", "로아"];
 
 //market list
-var market_list = ["upbit", "bithumb", "flat", "coinone"];//["upbit","bithumb","flat","coinone","binance"];
+var market_list = ["upbit","bithumb","flat","coinone","binance"];
 //api uri obj
 var api_uri = {
     "upbit": {
@@ -30,9 +30,9 @@ var api_uri = {
         "coin_list_uri": "coinone"
     },
     "binance": {
-        "base_uri": "",
-        "info_uri": "",
-        "coin_list_uri": ""
+        "base_uri": "https://api.binance.com/api/v1",
+        "info_uri": "/ticker/24hr?symbol=",
+        "coin_list_uri": "binance"
     }
 };
 
@@ -282,7 +282,7 @@ var coin_list_by_market = {
         "힙스": { "symbol": "hibs" },
         "유니스왑": { "symbol": "uni" }
     },
-    "bithumb":{
+    "bithumb": {
         "메이커": { "symbol": "MKR" },
         "앵커뉴럴월드": { "symbol": "ANW" },
         "제노토큰": { "symbol": "XNO" },
@@ -408,6 +408,156 @@ var coin_list_by_market = {
         "펫코노미": { "symbol": "PETCO/KRW" },
         "KRWG": { "symbol": "KRWG/KRW" },
         "디바": { "symbol": "DIBA/KRW" }
+    },
+    binance: {
+        "하이퍼캐시": { "symbol": "HC" },
+        "만트라다오": { "symbol": "OM" },
+        "OG": { "symbol": "OG" },
+        "시아코인": { "symbol": "SC" },
+        "젠캐시": { "symbol": "ZEN" },
+        "완체인": { "symbol": "WAN" },
+        "어거": { "symbol": "REP" },
+        "펀페어": { "symbol": "FUN" },
+        "에이다": { "symbol": "ADA" },
+        "시빅": { "symbol": "CVC" },
+        "이오스": { "symbol": "EOS" },
+        "칠리즈": { "symbol": "CHZ" },
+        "컨플럭스": { "symbol": "CFX" },
+        "썬": { "symbol": "SUN" },
+        "온톨로지": { "symbol": "ONT" },
+        "오키드": { "symbol": "OXT" },
+        "이더리움 클래식": { "symbol": "ETC" },
+        "뉴비트쉐어": { "symbol": "NBS" },
+        "비체인": { "symbol": "VEN" },
+        "비체인 토르": { "symbol": "VET" },
+        "팍소스": { "symbol": "PAX" },
+        "스타파이": { "symbol": "FIS" },
+        "악티늄": { "symbol": "ACM" },
+        "세이프팔": { "symbol": "SFP" },
+        "릿엔트리": { "symbol": "LIT" },
+        "트러스트 월렛": { "symbol": "TWT" },
+        "비트토렌트": { "symbol": "BTT" },
+        "너보스 네트워크": { "symbol": "CKB" },
+        "온톨로지가스": { "symbol": "ONG" },
+        "홀로": { "symbol": "HOT" },
+        "질리카": { "symbol": "ZIL" },
+        "제로엑스": { "symbol": "ZRX" },
+        "페치 에이아이": { "symbol": "FET" },
+        "베이직어텐션토큰": { "symbol": "BAT" },
+        "모네로": { "symbol": "XMR" },
+        "지캐시": { "symbol": "ZEC" },
+        "트루파이": { "symbol": "TRU" },
+        "인프라 프레임 워크": { "symbol": "RIF" },
+        "AS로마": { "symbol": "ASR" },
+        "아틀레티코 마드리드": { "symbol": "ATM" },
+        "오미세고": { "symbol": "OMG" },
+        "바이낸스 코인": { "symbol": "BNB" },
+        "엔진코인": { "symbol": "ENJ" },
+        "파리 생제르맹": { "symbol": "PSG" },
+        "유벤투스": { "symbol": "JUV" },
+        "더 그래프": { "symbol": "GRT" },
+        "스케일 네트워크": { "symbol": "SKL" },
+        "하모니 프로토콜": { "symbol": "ONE" },
+        "팬텀": { "symbol": "FTM" },
+        "넴": { "symbol": "XEM" },
+        "트라발라": { "symbol": "AVA" },
+        "기프토": { "symbol": "GTO" },
+        "엘론드": { "symbol": "ERD" },
+        "디스트릭트": { "symbol": "DNT" },
+        "액시 인피티니": { "symbol": "AXS" },
+        "써틱": { "symbol": "CTK" },
+        "윈": { "symbol": "WIN" },
+        "콘텐토스": { "symbol": "COS" },
+        "인젝티브 프로토콜": { "symbol": "INJ" },
+        "파일코인": { "symbol": "FIL" },
+        "메탈": { "symbol": "MTL" },
+        "비너스": { "symbol": "XVS" },
+        "유트러스트": { "symbol": "UTK" },
+        "오리온 프로토콜": { "symbol": "ORN" },
+        "메인프레임": { "symbol": "MFT" },
+        "셀프키": { "symbol": "KEY" },
+        "플라밍고": { "symbol": "FLM" },
+        "헬륨": { "symbol": "HNT" },
+        "라이트코인": { "symbol": "LTC" },
+        "리플": { "symbol": "XRP" },
+        "일립시스": { "symbol": "EPS" },
+        "스텔라": { "symbol": "XLM" },
+        "트론": { "symbol": "TRX" },
+        "아이콘": { "symbol": "ICX" },
+        "이더리움": { "symbol": "ETH" },
+        "테조스": { "symbol": "XTZ" },
+        "리퍼블릭프로토콜": { "symbol": "REN" },
+        "레이븐코인": { "symbol": "RVN" },
+        "네오": { "symbol": "NEO" },
+        "유니스왑": { "symbol": "UNI" },
+        "엔케이엔": { "symbol": "NKN" },
+        "스톡스": { "symbol": "STX" },
+        "벨라토큰": { "symbol": "BEL" },
+        "우마": { "symbol": "UMA" },
+        "피오프로토콜": { "symbol": "FIO" },
+        "아이젝": { "symbol": "RLC" },
+        "모나코": { "symbol": "MCO" },
+        "디아": { "symbol": "DIA" },
+        "비트코인 캐시": { "symbol": "BCH" },
+        "쿠사마": { "symbol": "KSM" },
+        "텔러": { "symbol": "TRB" },
+        "FTX 토큰": { "symbol": "FTT" },
+        "유로": { "symbol": "EUR" },
+        "오리진 프로토콜": { "symbol": "OGN" },
+        "리저브 라이트": { "symbol": "RSR" },
+        "폴카닷": { "symbol": "DOT" },
+        "뉴메레르": { "symbol": "NMR" },
+        "커브": { "symbol": "CRV" },
+        "아라곤": { "symbol": "ANT" },
+        "토큰클럽": { "symbol": "TCT" },
+        "와지르엑스": { "symbol": "WRX" },
+        "비트쉐어": { "symbol": "BTS" },
+        "리스크": { "symbol": "LSK" },
+        "뱅코르": { "symbol": "BNT" },
+        "엘티오 네트워크 토큰": { "symbol": "LTO" },
+        "세럼": { "symbol": "SRM" },
+        "저스트": { "symbol": "JST" },
+        "코모도": { "symbol": "KMD" },
+        "블루젤": { "symbol": "BLZ" },
+        "밸런서": { "symbol": "BAL" },
+        "연파이낸스": { "symbol": "YFI" },
+        "무비블록": { "symbol": "MBL" },
+        "호주달러": { "symbol": "AUD" },
+        "디크레드": { "symbol": "DCR" },
+        "다이": { "symbol": "DAI" },
+        "메이커": { "symbol": "MKR" },
+        "월튼체인": { "symbol": "WTC" },
+        "스와이프": { "symbol": "SXP" },
+        "피로": { "symbol": "XZC" },
+        "솔라나": { "symbol": "SOL" },
+        "파운드": { "symbol": "GBP" },
+        "디지바이트": { "symbol": "DGB" },
+        "크로미아": { "symbol": "CHR" },
+        "신세틱스": { "symbol": "SNX" },
+        "비트코인": { "symbol": "BTC" },
+        "지엑스체인": { "symbol": "GXS" },
+        "비트코인캣": { "symbol": "BCC" },
+        "피네트워크": { "symbol": "PNT" },
+        "메져러블 데이터 토큰": { "symbol": "MDT" },
+        "루핑": { "symbol": "LRC" },
+        "카이버 네트워크": { "symbol": "KNC" },
+        "오토": { "symbol": "AUTO" },
+        "퀀텀": { "symbol": "QTUM" },
+        "스톰엑스": { "symbol": "STMX" },
+        "에이브": { "symbol": "LEND" },
+        "컴파운드": { "symbol": "COMP" },
+        "원화": { "symbol": "BKRW" },
+        "루나": { "symbol": "LUNA" },
+        "드렙": { "symbol": "DREP" },
+        "아더": { "symbol": "ARDR" },
+        "팍소스 골드": { "symbol": "PAXG" },
+        "아이오타": { "symbol": "IOTA" },
+        "랩드 엔엑스엠": { "symbol": "WNXM" },
+        "퍼페츄얼 프로토콜": { "symbol": "PERP" },
+        "바이트": { "symbol": "VITE" },
+        "비토르": { "symbol": "VTHO" },
+        "하이브": { "symbol": "HIVE" },
+        "카르테시": { "symbol": "CTSI" }
     }
 };
 
@@ -423,7 +573,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     var value = null; // 파라미터 값
 
     if (sp_msg.length == 1 && sp_msg[0].startsWith("/") == 1) {
-        command = "ㅩ코인ㅹ"
+        command = "ㅩ코인ㅹ";
         value = sp_msg[0].substring(1);
     } else {
         command = sp_msg[0]; // 명령어 캐치
@@ -645,6 +795,13 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
         change_price = coin_info_obj.list[0].dayChg;
         change_rate = coin_info_obj.list[0].dayChgRate;
 
+    } else if (market_name == "binance"){
+        trade_price = coin_info_obj.lastPrice;
+        high_price = coin_info_obj.highPrice;
+        low_price = coin_info_obj.lowPrice;
+        change_price = coin_info_obj.priceChange;
+        change_rate = coin_info_obj.priceChangePercent;
+
     }
     change_arrow = change_price == 0 ? "-" : change_price > 0 ? "▲" : "▼";
 
@@ -653,6 +810,7 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
 
 //코인 정보
 function coin_search(base_uri, info_uri, symbol) {
+    if(base_uri.indexOf("binance") != 1) symbol += "USDT";
     // 해당 심볼 코인 시세 조회
     var coin_info_obj = JSON.parse(Utils.parse(base_uri + info_uri + symbol).body().text());
 
@@ -671,11 +829,19 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
         market_name = "빗썸";
     } else if (market_name == "flat") {
         market_name = "플랫타";
+    } else if (market_name == "binance") {
+        market_name = "바이낸스";
     }
-
-    return_message +=
+    
+    return_message =
         "[" + name + "]\n" +
         "￦ " + numberWithCommas(parseFloat(trade_price));
+    if (market_name == "binance") {
+        return_message =
+            "[" + name + "]\n" +
+            "＄ " + numberWithCommas(parseFloat(trade_price));
+    
+    }
 
     //비트코인 김프 추가
     if (symbol == "BTC" || symbol == "btc") {
