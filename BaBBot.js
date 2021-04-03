@@ -810,7 +810,9 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
 
 //코인 정보
 function coin_search(base_uri, info_uri, symbol) {
-    if(base_uri.indexOf("binance") != 1) symbol += "USDT";
+    if(base_uri.indexOf("binance") != -1){
+      symbol += "USDT";
+    }
     // 해당 심볼 코인 시세 조회
     var coin_info_obj = JSON.parse(Utils.parse(base_uri + info_uri + symbol).body().text());
 
@@ -836,7 +838,8 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
     return_message =
         "[" + name + "]\n" +
         "￦ " + numberWithCommas(parseFloat(trade_price));
-    if (market_name == "binance") {
+        
+    if (market_name == "바이낸스") {
         return_message =
             "[" + name + "]\n" +
             "＄ " + numberWithCommas(parseFloat(trade_price));
