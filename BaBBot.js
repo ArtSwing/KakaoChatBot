@@ -411,18 +411,6 @@ flatList.set("펫코노미", "PETCO/KRW");
 flatList.set("KRWG", "KRWG/KRW");
 flatList.set("디바", "DIBA/KRW");
 
-var domi = org.jsoup.Jsoup.connect(
-    "https://coinmarketcap.com/ko/charts/"
-).get();
-var domi_div = domi.select(
-    "#__next > div.sc-1mezg3x-0.fHFmDM.cmc-app-wrapper.cmc-app-wrapper--env-prod.cmc-theme--day > div.sc-1mezg3x-1.fxStDx > div.xwtbyq-0.iGclcX.cmc-bottom-margin-1x.cmc-header-desktop > div.sc-33i2yg-0.dOnegn > div > div:nth-child(1) > span:nth-child(5) > a"
-).toString()
-    .replace(/(<([^>]+)>)/gi, "")
-    .trim();
-domi_div_arr = domi_div.split("&nbsp");
-domi_div_btc = domi_div_arr[0];
-domi_div_eth = domi_div_arr[1];
-
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
     if (arr_room.indexOf(room) == -1) {
         return false;
@@ -620,16 +608,13 @@ function coin_check(market_name, value, coin_list_obj) {
         /**************************************** 빗썸 ********************************************/
     } else if (market_name == "flat") {
         /**************************************** 플랫타 ********************************************/
-        let data = read();
-        let data2 = data.split("\n");
-        let data4 = "";
-        for (var i = 0; i < data2.length; i++) {
-            if (data2[i].indexOf(message) >= 0) {
-                let data3 = data2[i].split(",");
-                data4 = data3[1];
-                break;
+        coin_list_obj.forEach(function (val, key) {
+            if (key.includes(value)) {
+                symbol = val;
+                name = key;
+                return;
             }
-        }
+        });
         /**************************************** 플랫타 ********************************************/
     }
 
@@ -663,28 +648,28 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
         low_price = coin_info_obj[0].low_price;
         change_price = coin_info_obj[0].change == "FALL" ? coin_info_obj[0].change_price * -1 : coin_info_obj[0].change_price;
         change_rate = coin_info_obj[0].change == "FALL" ? coin_info_obj[0].change_rate * 100 * -1 : + coin_info_obj[0].change_rate * 100;
-    
+
     } else if (market_name == "coinone") {
         trade_price = coin_info_obj.last;
         high_price = coin_info_obj.high;
         low_price = coin_info_obj.low;
         change_price = coin_info_obj.last - coin_info_obj.yesterday_last;
         change_rate = (coin_info_obj.last - coin_info_obj.yesterday_last) / coin_info_obj.yesterday_last * 100;
-    
+
     } else if (market_name == "bithumb") {
         trade_price = coin_info_obj.data.closing_price;
         high_price = coin_info_obj.data.max_price;
         low_price = coin_info_obj.data.min_price;
         change_price = coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price;
         change_rate = (coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100;
-    
+
     } else if (market_name == "flat") {
         trade_price = coin_info_obj.list[0].current;
         high_price = coin_info_obj.list[0].high;
         low_price = coin_info_obj.list[0].low;
-        change_price = coin_info_obj.list[0].data.dayChg;
-        change_rate = coin_info_obj.list[0].data.dayChgRate;
-    
+        change_price = coin_info_obj.list[0].dayChg;
+        change_rate = coin_info_obj.list[0].dayChgRate;
+
     }
     change_arrow = change_price == 0 ? "-" : change_price > 0 ? "▲" : "▼";
 
@@ -701,7 +686,7 @@ function coin_search(base_uri, info_uri, symbol) {
 
 //view message 코인 정보 make
 function coin_info(market_name, symbol, name, trade_price, high_price, low_price, change_price, change_rate, change_arrow) {
-    var retun_message = "";
+    var return_message = "";
 
     if (market_name == "upbit") {
         market_name = "업비트";
@@ -713,8 +698,13 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
         market_name = "플랫타";
     }
 
-    var dollar = "";
+    return_message +=
+        "[" + name + "]\n" +
+        "￦ " + numberWithCommas(parseFloat(trade_price));
+
+    //비트코인 김프 추가
     if (symbol == "BTC" || symbol == "btc") {
+        var dollar = "";
         /*********************************이부분 바이낸스 만들면 바꾸면 좋을듯 */
         var coin_info_dollar = Utils.getWebText(
             "https://api.binance.com/api/v1/ticker/24hr?symbol=BTCUSDT"
@@ -727,57 +717,65 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
         /****************************************************************** */
         var Rate = exRate();
 
-        return_message = "[" + name + "]\n" +
-            "￦ " + numberWithCommas(parseFloat(trade_price)) +
+        return_message +=
             "\n＄ " + numberWithCommas(parseFloat(dollar)) +
             "\n(￦ " + numberWithCommas(parseInt(dollar * Rate)) + ")" +
-            "\n김프(" + (((trade_price - dollar * Rate) / trade_price) * 100).toFixed(2) + "%)" +
-            "\n\n고가: " + numberWithCommas(parseFloat(high_price)) +
-            "\n저가: " + numberWithCommas(parseFloat(low_price)) +
-            "\n" + change_arrow + " " + numberWithCommas(parseInt(change_price)) +
-            "(" + parseFloat(change_rate).toFixed(2) + "%)" +
-            "\n도미 : " + domi_div_btc.replace("BTC: ", "") +
-            "\n\n" + market_name + " 기준";
+            "\n김프(" + (((trade_price - dollar * Rate) / trade_price) * 100).toFixed(2) + "%)\n";
     }
-    //이더리움일경우
-    else if (symbol == "ETH" || symbol == "eth") {
-        return_message =
-            "[" + name + "]\n" +
-            "￦ " + numberWithCommas(parseFloat(trade_price)) +
-            "\n고가: " + numberWithCommas(parseFloat(high_price)) +
-            "\n저가: " + numberWithCommas(parseFloat(low_price)) +
-            "\n" + change_arrow + " " + numberWithCommas(parseFloat(change_price).toFixed(2)) +
-            "(" + parseFloat(change_rate).toFixed(2) + "%)" +
-            "\n도미 : " + domi_div_eth.replace(";ETH: ", "") +
-            "\n\n" + market_name + " 기준";
-    } else {
-        return_message =
-            "[" + name + "]\n" +
-            "￦ " + numberWithCommas(parseFloat(trade_price)) +
-            "\n고가: " + numberWithCommas(parseFloat(high_price)) +
-            "\n저가: " + numberWithCommas(parseFloat(low_price)) +
-            "\n" + change_arrow + " " + numberWithCommas(parseFloat(change_price).toFixed(2)) +
-            "(" + parseFloat(change_rate).toFixed(2) + "%)" +
-            "\n도미 : " + domi_div_eth.replace(";ETH: ", "") +
-            "\n\n" + market_name + " 기준";
+
+    return_message +=
+        "\n고가: " + numberWithCommas(parseFloat(high_price)) +
+        "\n저가: " + numberWithCommas(parseFloat(low_price)) +
+        "\n" + change_arrow + " " + numberWithCommas(parseFloat(parseFloat(change_price).toFixed(4))) + "(" + parseFloat(parseFloat(change_rate).toFixed(2)) + "%)";
+
+    //비트코인이랑 이더리움 도미 추가
+    if (symbol == "BTC" || symbol == "btc" || symbol == "ETH" || symbol == "eth") {
+        return_message +=
+            "\n도미 : " + getDomi(symbol) + "%";
     }
-    
+
+    return_message +=
+        "\n\n" + market_name + " 기준";
+
     return return_message;
+}
+
+//도미넌스 가져오는 함수
+function getDomi(symbol) {
+    var domi = null;
+
+    var json_domi = Utils.parse("https://api.coinlore.net/api/global/").body().text();
+    var obj_domi = JSON.parse(json_domi);
+
+    if (symbol.toUpperCase() == "BTC") {
+        domi = obj_domi[0].btc_d;
+    } else if (symbol.toUpperCase() == "ETH") {
+        domi = obj_domi[0].eth_d;
+    }
+    return domi;
 }
 
 //환율
 function exRate() {
-    var ExRate = Utils.parse("https://api.exchangeratesapi.io/latest?symbols=USD,KRW&base=USD").body().text();
-    return parseFloat(ExRate.split(":")[2].split(",")[0]);
+    var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
+    return parseFloat(ExRate[0].rate);
 }
 
 /*////////////////////////////////////
   3자리마다 콤마를 찍는 함수
   histort - 유한빈 20210326 최초제작
-        -
+          - 권민재 20210404 수정
   ////////////////////////////////////*/
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (x == 0 || isNaN(x)) return 0;
+
+    var reg = /(^[+-]?\d+)(\d{3})/;
+    var n = (x + '');
+
+    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+
+    return n;
 }
 
 /*////////////////////////////////////

@@ -1,25 +1,33 @@
-//number에 3자리 마다 , 찍는 format 추가
-Number.prototype.format = function(){
-    if(this==0) return 0;
- 
-    var reg = /(^[+-]?\d+)(\d{3})/;
-    var n = (this + '');
- 
-    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
- 
-    return n;
-};
- 
-// 문자열 타입에서 쓸 수 있도록 format() 함수 추가
-String.prototype.format = function(){
-    var num = parseFloat(this);
-    if( isNaN(num) ) return "0";
- 
-    return num.format();
-};
-
 //환율
 function exRate(){
     var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
     return parseFloat(ExRate[0].rate);
+}
+
+//도미넌스 가져오는 함수
+function getDomi(symbol){
+    /*
+    var domi = org.jsoup.Jsoup.connect(
+        "https://coinmarketcap.com/ko/charts/"
+    ).get();
+    var domi_div = domi.select(
+        "#__next > div.sc-1mezg3x-0.fHFmDM.cmc-app-wrapper.cmc-app-wrapper--env-prod.cmc-theme--day > div.sc-1mezg3x-1.fxStDx > div.xwtbyq-0.iGclcX.cmc-bottom-margin-1x.cmc-header-desktop > div.sc-33i2yg-0.dOnegn > div > div:nth-child(1) > span:nth-child(5) > a"
+    ).toString()
+        .replace(/(<([^>]+)>)/gi, "")
+        .trim();
+    domi_div_arr = domi_div.split("&nbsp");
+    domi_div_btc = domi_div_arr[0];
+    domi_div_eth = domi_div_arr[1];
+    */
+    var domi = null;
+
+    var json_domi = Utils.parse("https://api.coinlore.net/api/global/").body().text();
+    var obj_domi = JSON.parse(test);
+    
+    if(symbol.toUpperCase == "BTC"){
+        domi = obj_domi.btc_d;
+    }else if(symbol.toUpperCase == "ETH"){
+        domi = obj_domi.eth_d;
+    }
+    return domi;
 }
