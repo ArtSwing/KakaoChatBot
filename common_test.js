@@ -17,3 +17,9 @@ String.prototype.format = function(){
  
     return num.format();
 };
+
+//환율
+function exRate(){
+    var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
+    return parseFloat(ExRate[0].rate);
+}
