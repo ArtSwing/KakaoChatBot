@@ -369,7 +369,12 @@ var coin_list_by_market = {
         "이포스": { "symbol": "WOZX" },
         "원루트네트워크": { "symbol": "RNT" },
         "라이파이낸스": { "symbol": "RAI" },
-        "맵프로토콜": { "symbol": "MAP_BTC" }
+        "맵프로토콜": { "symbol": "MAP_BTC" },
+        "위드": { "symbol": "WIKEN_BTC" },
+        "플레타": { "symbol": "WIKEN_BTC" },
+        "너보스": { "symbol": "CKB_BTC" },
+        "콜라토큰": { "symbol": "COLA_BTC" },
+        "블로서리": { "symbol": "BLY_BTC" }
     },
       flat: {
         "비트코인": { "symbol": "BTC/KRW" },
@@ -1028,6 +1033,13 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
             "＄ " + numberWithCommas(parseFloat(trade_price));
     
     }
+    //빗썸 btc 처리
+    if(symbol.includes("_BTC")){
+        return_message =
+            "[" + name + "]\n" +
+            "₿ " + numberWithCommas(parseFloat(trade_price));
+        
+    }
 
     //비트코인 김프 추가
     if (symbol == "BTC" || symbol == "btc") {
@@ -1119,7 +1131,115 @@ function cho(str){
   return res; }
 
 
+function UpbitKPre(msg) {
+  msg.trim();
+  var command = msg.split(" ")[0];
+  var value = msg.split(" ")[1];
+  if (msg.split(" ").length == 2) {
+    if (command == "=김프") {
+      var coin_list = Utils.getWebText("https://api.upbit.com/v1/market/all");
+      var coin_list_json = coin_list.replace(/<[^>]+>/g, "").trim();
+      const coin_list_obj = JSON.parse(coin_list_json);
 
+      // 최종 검색 심볼과 이름
+      var symbol = null;
+      var name = null;
+
+      const search_map = new Map();
+      // 전체 코인 리스트에서 검색한 코인들 중 KRW마켓인것만 리스트에 추가
+      for (var i = 0; i < coin_list_obj.length; i++) {
+        if (coin_list_obj[i].korean_name.includes(value)) {
+          if (coin_list_obj[i].market.split("-")[0] == "KRW") {
+            search_map.set(
+              coin_list_obj[i].korean_name,
+              coin_list_obj[i].market.split("-")[1]
+            );
+          }
+        }
+      }
+
+      // search_map 이름이 포함된 코인 리스트
+      if (search_map.size > 0) {
+        search_map.forEach((market, val) => {
+          if (val == value) {
+            name = val;
+            symbol = market;
+          }
+        });
+    if (name == null) {
+          name = search_map.keys().next().value;
+          symbol = search_map.values().next().value;
+        }
+      } else {
+        replier.reply("해당 코인은 존재하지 않습니다.");
+        return;
+      }
+
+      // 해당 심볼 코인 시세 조회
+      var coin_info = Utils.getWebText(
+        "https://api.upbit.com/v1/ticker?markets=krw-" + symbol
+      );
+
+      var coin_info_json = coin_info.replace(/(<([^>]+)>)/gi, "").trim();
+      const coin_info_obj = JSON.parse(coin_info_json);
+
+      var dollar = 0.0;
+      var coin_info_dollar = Utils.getWebText(
+        "https://api.binance.com/api/v1/ticker/24hr?symbol=" + symbol + "USDT"
+      );
+      var coin_info_json_dollar = coin_info_dollar
+        .replace(/(<([^>]+)>)/gi, "")
+        .trim();
+      const coin_info_obj_dollar = JSON.parse(coin_info_json_dollar);
+      dollar = coin_info_obj_dollar.lastPrice;
+
+      var ExRate = Utils.getWebText(
+        "https://api.manana.kr/exchange/rate.json?base=KRW&code=USD"
+      )
+        .replace(/(<([^>]+)>)/gi, "")
+        .trim();
+
+      const coin_info_obj_rate = JSON.parse(ExRate);
+      var Rate = coin_info_obj_rate[0].rate;
+
+      var usdt_to_usd = 
+      "https://walletinvestor.com/converter/tether/usd/1";
+      var usdt_exchange =
+        org.jsoup.Jsoup.connect(usdt_to_usd)
+          .get()
+          .select(
+            "body > div.wrap > div > div.converter > div.converter-title-details > h2 > strong > span"
+          ) + "";
+
+      usdt_exchange = usdt_exchange.replace(/(<([^>]+)>)/gi, "");
+      dollar = dollar * usdt_exchange;
+      var tradePrice = coin_info_obj[0].trade_price;
+      var kimchi = ((tradePrice / (dollar * Rate)) * 100 - 100).toFixed(2);
+      if (isNaN(kimchi)) {
+        kimchi = "No Data";
+      }
+
+      var rtnStr = String.format(
+        "[{0}]\n￦ {1}\n김프: {2}",
+        name,
+        tradePrice,
+        kimchi
+      );
+
+      return rtnStr;
+    }
+    return null;
+  }
+  return null;
+}
+
+String.format = function () {
+  let args = arguments;
+  return args[0].replace(/{(\d+)}/g, function (match, num) {
+    num = Number(num) + 1;
+    return typeof args[num] != undefined ? args[num] : match;
+  });
+};
 
 /*////////////////////////////////////
   입력된 메시지가 숫자인지 아닌지 
