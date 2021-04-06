@@ -946,7 +946,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
         return_message +=
             "\n＄ " + numberWithCommas(parseFloat(dollar)) +
             "\n(￦ " + numberWithCommas(parseInt(dollar * Rate)) + ")" +
-            "\n김프(" + (((trade_price - dollar * Rate) / trade_price) * 100).toFixed(2) + "%)\n";
+            "\n김프(" + ((trade_price/(dollar*Rate))*100-100).toFixed(2) + "%)\n";
     }
 
     return_message +=
