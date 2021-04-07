@@ -1185,7 +1185,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
     //빗썸 btc 처리
     else{
         return_message +=
-        "\n고가: " + numberWithCommas(parseFloat(high_price).toFixed(8)) +
+        "\n고가: " + (parseFloat(high_price).toFixed(8)) +
         "\n저가: " + numberWithCommas(parseFloat(low_price).toFixed(8)) +
         "\n" + change_arrow + " " + numberWithCommas(parseFloat(change_price).toFixed(8)) + "(" + parseFloat(parseFloat(change_rate).toFixed(2)) + "%)";
       
@@ -1346,7 +1346,7 @@ function UpbitKPre(msg) {
       var rtnStr = String.format(
         "[{0}]\n￦ {1}\n김프: {2}",
         name,
-        tradePrice,
+        numberWithCommas(tradePrice),
         kimchi
       );
 
