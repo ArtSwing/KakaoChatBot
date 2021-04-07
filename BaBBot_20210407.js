@@ -650,6 +650,9 @@ var coin_list_by_market = {
     }
 };
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
+
+  
+  
     if (arr_room.indexOf(room) == -1) {
         return false;
     }
@@ -666,6 +669,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     } else {
         command = sp_msg[0]; // 명령어 캐치
         value = sp_msg[1]; // 파라미터 값
+    }
+    
+    //우진이의 김프계산
+  var rtnStr = UpbitKPre(msg);
+    if (rtnStr != null) {
+      replier.reply(rtnStr);
     }
 
     //마켓별 코인 리스트
@@ -700,7 +709,34 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             }
         }
         
-        if(coin_base==false){
+        
+          if(coin_base == false){
+           for (var idx in market_list) {
+
+            market_name = market_list[idx];
+            uri_obj = api_uri[market_name];
+
+            if (market_name == "upbit") {
+                //upbit에는 코인 리스트 가져오는 api가 있음
+                coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
+            } else {
+                //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
+                coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
+            }
+
+            //거래소에 코인이 있는지 확인
+            coin_base = coin_check_cho_true(market_name, cho(value), coin_list_obj);
+            if (coin_base != false) {
+                //있으면
+                break;
+            }
+        }
+          
+          
+        }
+        
+        
+            if(coin_base == false){
            for (var idx in market_list) {
 
             market_name = market_list[idx];
@@ -724,8 +760,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
           
           
         }
+      
 
-          
           
         
         
@@ -740,6 +776,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
 
         replier.reply(setting_by_market(market_name, uri_obj.base_uri, uri_obj.info_uri, value, coin_base));
+
 
     }
       /*
@@ -822,7 +859,7 @@ function coin_check(market_name, value, coin_list_obj) {
         const search_map = new Map();
         // 전체 코인 리스트에서 검색한 코인들 중 KRW마켓인것만 리스트에 추가
         for (var i = 0; i < coin_list_obj.length; i++) {
-            if (cho(coin_list_obj[i].korean_name).includes(value)) {
+            if (coin_list_obj[i].korean_name.includes(value)) {
                 if (coin_list_obj[i].market.split("-")[0] == "KRW") {
                     search_map.set(coin_list_obj[i].korean_name, coin_list_obj[i].market.split("-")[1]);
                 }
@@ -871,6 +908,73 @@ function coin_check(market_name, value, coin_list_obj) {
         return false;
     }
 }
+
+//코인 체크
+function coin_check_cho_true(market_name, value, coin_list_obj) {
+    //코인 symbol
+    var symbol = null;
+    //코인 kr_name
+    var name = null;
+    var test = null;
+    if (market_name == "upbit") {
+        /**************************************** 업비트 ********************************************/
+        const search_map = new Map();
+        // 전체 코인 리스트에서 검색한 코인들 중 KRW마켓인것만 리스트에 추가
+        for (var i = 0; i < coin_list_obj.length; i++) {
+          test=coin_list_obj[i].korean_name;
+            if (cho(test)==value) {
+                if (coin_list_obj[i].market.split("-")[0] == "KRW") {
+                    search_map.set(coin_list_obj[i].korean_name, coin_list_obj[i].market.split("-")[1]);
+                }
+            }
+        }
+        // search_map 이름이 포함된 코인 리스트
+        if (search_map.size > 0) {
+            search_map.forEach((market, val) => {
+                if (val == value) {
+                    name = val;
+                    symbol = market;
+                }
+            });
+            if (name == null) {
+                name = search_map
+                    .keys()
+                    .next()
+                    .value;
+                symbol = search_map
+                    .values()
+                    .next()
+                    .value;
+            }
+        }
+        /**************************************** 업비트 ********************************************/
+    } else {
+        /**************************************** other ********************************************/
+        if (coin_list_obj.hasOwnProperty(value)) {
+            name = value;
+            symbol = coin_list_obj[value].symbol;
+        } else {
+            for (var k in coin_list_obj) {
+                if (cho(k)==value) {
+                    name = k;
+                                     symbol = coin_list_obj[k].symbol;
+                    break;
+                }
+            }
+        }
+        /**************************************** other ********************************************/
+    }
+
+    if (name != null || symbol != null) {
+        return { "name": name, "symbol": symbol };
+    } else {
+        return false;
+    }
+}
+
+
+
+
 
 //코인 체크
 function coin_check_cho(market_name, value, coin_list_obj) {
@@ -1037,7 +1141,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
     if(symbol.includes("_BTC")){
         return_message =
             "[" + name + "]\n" +
-            "₿ " + numberWithCommas(parseFloat(trade_price));
+            "₿ " + numberWithCommas(parseFloat(trade_price).toFixed(8));
         
     }
 
@@ -1062,11 +1166,26 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
             "\n김프(" + ((trade_price/(dollar*Rate))*100-100).toFixed(2) + "%)\n";
     }
 
-    return_message +=
+    //btc제외 처리
+    if(!symbol.includes("_BTC")){
+        return_message +=
         "\n고가: " + numberWithCommas(parseFloat(high_price)) +
         "\n저가: " + numberWithCommas(parseFloat(low_price)) +
         "\n" + change_arrow + " " + numberWithCommas(parseFloat(parseFloat(change_price).toFixed(4))) + "(" + parseFloat(parseFloat(change_rate).toFixed(2)) + "%)";
-
+      
+      
+    }
+    
+    //빗썸 btc 처리
+    else{
+        return_message +=
+        "\n고가: " + numberWithCommas(parseFloat(high_price).toFixed(8)) +
+        "\n저가: " + numberWithCommas(parseFloat(low_price).toFixed(8)) +
+        "\n" + change_arrow + " " + numberWithCommas(parseFloat(change_price).toFixed(8)) + "(" + parseFloat(parseFloat(change_rate).toFixed(2)) + "%)";
+      
+      
+    }
+  
     //비트코인이랑 이더리움 도미 추가
     if (symbol == "BTC" || symbol == "btc" || symbol == "ETH" || symbol == "eth") {
         return_message +=
