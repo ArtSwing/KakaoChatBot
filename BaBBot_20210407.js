@@ -674,7 +674,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     //우진이의 김프계산
   var rtnStr = UpbitKPre(msg);
     if (rtnStr != null) {
-      replier.reply(rtnStr);
+      if(rtnStr =="N"){
+        
+        replier.reply("해당 코인은 존재하지 않습니다.");
+      }else{
+        replier.reply(rtnStr);
+        
+      }
     }
 
     //마켓별 코인 리스트
@@ -1290,8 +1296,7 @@ function UpbitKPre(msg) {
           symbol = search_map.values().next().value;
         }
       } else {
-        replier.reply("해당 코인은 존재하지 않습니다.");
-        return;
+        return "N";
       }
 
       // 해당 심볼 코인 시세 조회
