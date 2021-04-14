@@ -19,6 +19,7 @@ function getDomi(symbol){
     domi_div_btc = domi_div_arr[0];
     domi_div_eth = domi_div_arr[1];
     */
+    /*
     var domi = null;
 
     var json_domi = Utils.parse("https://api.coinlore.net/api/global/").body().text();
@@ -28,6 +29,16 @@ function getDomi(symbol){
         domi = obj_domi.btc_d;
     }else if(symbol.toUpperCase == "ETH"){
         domi = obj_domi.eth_d;
+    }
+    */
+    var domi = null;
+
+    var json = Utils.parse("https://coinmarketcap.com/ko/charts/").body().text();
+    json = json.split("Dominance: ")[1].split("ETH Gas:")[0];
+    if (symbol.toUpperCase() == "ETH") {
+        domi = json.split(" ")[3];
+    } else {
+        domi = json.split(" ")[1];
     }
     return domi;
 }

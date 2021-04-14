@@ -693,175 +693,175 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
     try {
 
-if (!FS.read(chatpath)) FS.write(chatpath, "{}");
+        if (!FS.read(chatpath)) FS.write(chatpath, "{}");
 
-if (msg) {
+        if (msg) {
 
-json = JSON.parse(FS.read(chatpath))
+            json = JSON.parse(FS.read(chatpath))
 
-json[room] == undefined&&(json[room] = []);
+            json[room] == undefined && (json[room] = []);
 
-json[all] == undefined&&(json[all] = []);
+            json[all] == undefined && (json[all] = []);
 
-msg = msg.replace(/\u202E/g, "")
+            msg = msg.replace(/\u202E/g, "")
 
-sender = sender.replace(/\u202E/g, "")
+            sender = sender.replace(/\u202E/g, "")
 
-json[room].push(sender+" : "+msg+"\n\n("+new Date().toLocaleString().split("일 ")[1].split(" G")[0]+")")
+            json[room].push(sender + " : " + msg + "\n\n(" + new Date().toLocaleString().split("일 ")[1].split(" G")[0] + ")")
 
-json[all].push("방 : "+room+" ("+(room==sender?"개인챗":"그룹챗")+")\n\n"+sender+" : "+msg+"\n\n("+new Date().toLocaleString().split("일 ")[1].split(" G")[0]+")")
+            json[all].push("방 : " + room + " (" + (room == sender ? "개인챗" : "그룹챗") + ")\n\n" + sender + " : " + msg + "\n\n(" + new Date().toLocaleString().split("일 ")[1].split(" G")[0] + ")")
 
-FS.write(chatpath, JSON.stringify(json))
+            FS.write(chatpath, JSON.stringify(json))
 
-}
+        }
 
-//채팅 보기 (사람)
+        //채팅 보기 (사람)
 
-if (msg.startsWith("!채팅보기")) {
+        if (msg.startsWith("!채팅보기")) {
 
-send = msg.substr(5).trim()
+            send = msg.substr(5).trim()
 
-if ((JSON.parse(FS.read(chatpath))[all].filter(a=>a.split("\n\n")[1].split(" : ")[0].trim() == send)).length!=0) {
+            if ((JSON.parse(FS.read(chatpath))[all].filter(a => a.split("\n\n")[1].split(" : ")[0].trim() == send)).length != 0) {
 
-sendchat = JSON.parse(FS.read(chatpath))[all].filter(a=>a.split("\n\n")[1].split(" : ")[0].trim() == send)
+                sendchat = JSON.parse(FS.read(chatpath))[all].filter(a => a.split("\n\n")[1].split(" : ")[0].trim() == send)
 
-if (!back) {
+                if (!back) {
 
-rep = L+"\n\n"+sendchat.join("\n\n"+L+"\n\n")+"\n\n"+L
+                    rep = L + "\n\n" + sendchat.join("\n\n" + L + "\n\n") + "\n\n" + L
 
-} else {
+                } else {
 
-rep = L+"\n\n"+sendchat.reverse().join("\n\n"+L+"\n\n")+"\n\n"+L
+                    rep = L + "\n\n" + sendchat.reverse().join("\n\n" + L + "\n\n") + "\n\n" + L
 
-}
+                }
 
-replier.reply("[!] '"+send+"' 님의 채팅 기록입니다."+Lw+"\n\n총 "+sendchat.length+"개\n\n"+rep)
+                replier.reply("[!] '" + send + "' 님의 채팅 기록입니다." + Lw + "\n\n총 " + sendchat.length + "개\n\n" + rep)
 
-} else {
+            } else {
 
-replier.reply("[!] 해당 유저의 채팅 기록이 존재하지 않습니다!")
+                replier.reply("[!] 해당 유저의 채팅 기록이 존재하지 않습니다!")
 
-}
+            }
 
-}
+        }
 
-//채팅 기록 (방)
+        //채팅 기록 (방)
 
-if (msg.startsWith("!채팅기록")) {
+        if (msg.startsWith("!채팅기록")) {
 
-ep = msg.substr(5).trim()
+            ep = msg.substr(5).trim()
 
-if (ep == "") {
+            if (ep == "") {
 
-if (!back) {
+                if (!back) {
 
-rep = L+"\n\n"+JSON.parse(FS.read(chatpath))[room].join("\n\n"+L+"\n\n")+"\n\n"+L
+                    rep = L + "\n\n" + JSON.parse(FS.read(chatpath))[room].join("\n\n" + L + "\n\n") + "\n\n" + L
 
-} else {
+                } else {
 
-rep = L+"\n\n"+JSON.parse(FS.read(chatpath))[room].reverse().join("\n\n"+L+"\n\n")+"\n\n"+L
+                    rep = L + "\n\n" + JSON.parse(FS.read(chatpath))[room].reverse().join("\n\n" + L + "\n\n") + "\n\n" + L
 
-}
+                }
 
-replier.reply("[!] '"+room+"' 의 채팅 기록입니다."+Lw+"\n\n총 "+(JSON.parse(FS.read(chatpath))[room]).length+"개\n\n"+rep)
+                replier.reply("[!] '" + room + "' 의 채팅 기록입니다." + Lw + "\n\n총 " + (JSON.parse(FS.read(chatpath))[room]).length + "개\n\n" + rep)
 
-} else if (ep == "전체") {
+            } else if (ep == "전체") {
 
-if (!back) {
+                if (!back) {
 
-rep = L+"\n\n"+JSON.parse(FS.read(chatpath))[all].join("\n\n"+L+"\n\n")+"\n\n"+L
+                    rep = L + "\n\n" + JSON.parse(FS.read(chatpath))[all].join("\n\n" + L + "\n\n") + "\n\n" + L
 
-} else {
+                } else {
 
-rep = L+"\n\n"+JSON.parse(FS.read(chatpath))[all].reverse().join("\n\n"+L+"\n\n")+"\n\n"+L
+                    rep = L + "\n\n" + JSON.parse(FS.read(chatpath))[all].reverse().join("\n\n" + L + "\n\n") + "\n\n" + L
 
-}
+                }
 
-replier.reply("[!] 종합 채팅 기록입니다."+Lw+"\n\n총 "+(JSON.parse(FS.read(chatpath))[all]).length+"개\n\n"+rep)
+                replier.reply("[!] 종합 채팅 기록입니다." + Lw + "\n\n총 " + (JSON.parse(FS.read(chatpath))[all]).length + "개\n\n" + rep)
 
-} else {
+            } else {
 
-if (JSON.parse(FS.read(chatpath))[ep]) {
+                if (JSON.parse(FS.read(chatpath))[ep]) {
 
-if (!back) {
+                    if (!back) {
 
-rep = L+"\n\n"+JSON.parse(FS.read(chatpath))[ep].join("\n\n"+L+"\n\n")+"\n\n"+L
+                        rep = L + "\n\n" + JSON.parse(FS.read(chatpath))[ep].join("\n\n" + L + "\n\n") + "\n\n" + L
 
-} else {
+                    } else {
 
-rep = L+"\n\n"+JSON.parse(FS.read(chatpath))[ep].reverse().join("\n\n"+L+"\n\n")+"\n\n"+L
+                        rep = L + "\n\n" + JSON.parse(FS.read(chatpath))[ep].reverse().join("\n\n" + L + "\n\n") + "\n\n" + L
 
-}
+                    }
 
-replier.reply("[!] '"+ep+"' 의 채팅 기록입니다."+Lw+"\n\n총 "+(JSON.parse(FS.read(chatpath))[ep]).length+"개\n\n"+rep)
+                    replier.reply("[!] '" + ep + "' 의 채팅 기록입니다." + Lw + "\n\n총 " + (JSON.parse(FS.read(chatpath))[ep]).length + "개\n\n" + rep)
 
-} else {
+                } else {
 
-replier.reply("[!] 해당 방의 채팅 기록이 존재하지 않습니다!")
+                    replier.reply("[!] 해당 방의 채팅 기록이 존재하지 않습니다!")
 
-}
+                }
 
-}
+            }
 
-}
+        }
 
-if (msg == "!방목록") {
+        if (msg == "!방목록") {
 
-json = JSON.parse(FS.read(chatpath))
+            json = JSON.parse(FS.read(chatpath))
 
-roomlist = Object.keys(json)
+            roomlist = Object.keys(json)
 
-roomlist.splice(roomlist.indexOf(all), 1)
+            roomlist.splice(roomlist.indexOf(all), 1)
 
-roomlist = roomlist.map(a=>"이름 : "+a+"\n총 채팅 수 : "+json[a].length+"회")
+            roomlist = roomlist.map(a => "이름 : " + a + "\n총 채팅 수 : " + json[a].length + "회")
 
-replier.reply("[!] 채팅 기록이 저장되어 있는 방 목록입니다."+Lw+"\n\n총 "+roomlist.length+"개\n\n"+roomlist.join("\n\n"))
+            replier.reply("[!] 채팅 기록이 저장되어 있는 방 목록입니다." + Lw + "\n\n총 " + roomlist.length + "개\n\n" + roomlist.join("\n\n"))
 
-}
+        }
 
-if (admins.indexOf(sender)!=-1) {
+        if (admins.indexOf(sender) != -1) {
 
-if (msg.startsWith("!채팅초기화")) {
+            if (msg.startsWith("!채팅초기화")) {
 
-ep = msg.substr(6).trim()
+                ep = msg.substr(6).trim()
 
-if (ep == "") {
+                if (ep == "") {
 
-json = JSON.parse(FS.read(chatpath))
+                    json = JSON.parse(FS.read(chatpath))
 
-delete json[room]
+                    delete json[room]
 
-FS.write(chatpath, JSON.stringify(json))
+                    FS.write(chatpath, JSON.stringify(json))
 
-replier.reply("[!] '"+room+"' 방의 채팅 기록이 초기화 되었습니다!")
+                    replier.reply("[!] '" + room + "' 방의 채팅 기록이 초기화 되었습니다!")
 
-} else if (ep == "전체") {
+                } else if (ep == "전체") {
 
-FS.write(chatpath, "{}")
+                    FS.write(chatpath, "{}")
 
-replier.reply("[!] 모든 채팅 기록이 초기화 되었습니다!")
+                    replier.reply("[!] 모든 채팅 기록이 초기화 되었습니다!")
 
-} else {
+                } else {
 
-json = JSON.parse(FS.read(chatpath))
+                    json = JSON.parse(FS.read(chatpath))
 
-delete json[ep]
+                    delete json[ep]
 
-FS.write(chatpath, JSON.stringify(json))
+                    FS.write(chatpath, JSON.stringify(json))
 
-replier.reply("[!] '"+ep+"' 방의 채팅 기록이 초기화 되었습니다!")
+                    replier.reply("[!] '" + ep + "' 방의 채팅 기록이 초기화 되었습니다!")
 
-}
+                }
 
-}
+            }
 
-}
+        }
 
-} catch(e) {
+    } catch (e) {
 
-FS.write(chatpath, "{}")
+        FS.write(chatpath, "{}")
 
-}
+    }
 
 
     if (arr_room.indexOf(room) == -1) {
@@ -1387,7 +1387,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
     //비트코인이랑 이더리움 도미 추가
     if (symbol == "BTC" || symbol == "btc" || symbol == "ETH" || symbol == "eth") {
         return_message +=
-            "\n도미 : " + getDomi(symbol) + "%";
+            "\n도미 : " + getDomi(symbol);
     }
 
     return_message +=
@@ -1395,17 +1395,17 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
 
     return return_message;
 }
+
 //도미넌스 가져오는 함수
 function getDomi(symbol) {
     var domi = null;
 
-    var json_domi = Utils.parse("https://api.coinlore.net/api/global/").body().text();
-    var obj_domi = JSON.parse(json_domi);
-
-    if (symbol.toUpperCase() == "BTC") {
-        domi = obj_domi[0].btc_d;
-    } else if (symbol.toUpperCase() == "ETH") {
-        domi = obj_domi[0].eth_d;
+    var json = Utils.parse("https://coinmarketcap.com/ko/charts/").body().text();
+    json = json.split("Dominance: ")[1].split("ETH Gas:")[0];
+    if (symbol.toUpperCase() == "ETH") {
+        domi = json.split(" ")[3];
+    } else {
+        domi = json.split(" ")[1];
     }
     return domi;
 }
