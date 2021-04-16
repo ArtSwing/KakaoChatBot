@@ -1532,7 +1532,7 @@ function UpbitKPre(msg) {
             }
 
             var rtnStr = String.format(
-                "[{0}]\n￦ {1}\n김프: {2}",
+                "[{0}]\n￦ {1}\n김프: {2}%",
                 name,
                 numberWithCommas(tradePrice),
                 kimchi
