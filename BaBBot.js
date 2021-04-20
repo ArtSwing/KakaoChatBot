@@ -30,6 +30,7 @@ var api_uri = {
         "info_uri": "/ticker?currency=",
         "coin_list_uri": "coinone"
     },
+  
     "binance": {
         "base_uri": "https://api.binance.com/api/v1",
         "info_uri": "/ticker/24hr?symbol=",
