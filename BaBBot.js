@@ -384,12 +384,11 @@ var coin_list_by_market = {
         "너보스": { "symbol": "CKB_BTC" },
         "콜라토큰": { "symbol": "COLA_BTC" },
         "블로서리": { "symbol": "BLY_BTC" },
-        "게이머코인":
-            { "symbol": "GHX_BTC" },
-        "힙스":
-            { "symbol": "HIBS_BTC" },
-        "어셈블프로토콜":
-            { "symbol": "ASM_BTC" }
+        "게이머코인": { "symbol": "GHX_BTC" },
+        "힙스": { "symbol": "HIBS_BTC" },
+        "어셈블프로토콜": { "symbol": "ASM_BTC" },
+        "아로와나": { "symbol": "ARW" }
+        
     },
     flat: {
         "비트코인": { "symbol": "BTC/KRW" },
