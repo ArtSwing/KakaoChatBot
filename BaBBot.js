@@ -873,7 +873,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     var command = null; // 명령어 캐치
     var value = null; // 파라미터 값
 
-    if (sp_msg.length == 1 && sp_msg[0].startsWith("/") == 1) {
+    if (sp_msg.length == 1 && sp_msg[0].startsWith("&") == 1) {
         command = "ㅩ코인ㅹ";
         value = sp_msg[0].substring(1);
     } else {
@@ -924,7 +924,6 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             }
         }
 
-
         if (coin_base == false) {
             for (var idx in market_list) {
 
@@ -946,8 +945,6 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                     break;
                 }
             }
-
-
         }
         if (coin_base == false) {
             for (var idx in market_list) {
@@ -970,22 +967,14 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                     break;
                 }
             }
-
-
         }
 
-
         if (coin_base == false) {
-
-
             replier.reply(value + " 을(를) 검색할 수 없습니다.");
             return;
 
-
         }
-
         replier.reply(setting_by_market(market_name, uri_obj.base_uri, uri_obj.info_uri, value, coin_base));
-
 
     }
     /*
@@ -1277,8 +1266,7 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
         high_price = coin_info_obj.data.max_price;
         low_price = coin_info_obj.data.min_price;
         change_price = coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price;
-        change_rate = (coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price) / coin_info_obj.data.closing_price * 100;
-
+        change_rate = (coin_info_obj.data.closing_price - coin_info_obj.data.prev_closing_price) / coin_info_obj.data.prev_closing_price * 100;        
     } else if (market_name == "flat") {
         trade_price = coin_info_obj.list[0].current;
         high_price = coin_info_obj.list[0].high;
@@ -1366,12 +1354,10 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
 
     //btc제외 처리
     if (!symbol.includes("_BTC")) {
-        return_message +=
+        return_message += 
             "\n고가: " + numberWithCommas(parseFloat(high_price)) +
             "\n저가: " + numberWithCommas(parseFloat(low_price)) +
             "\n" + change_arrow + " " + numberWithCommas(parseFloat(parseFloat(change_price).toFixed(4))) + "(" + parseFloat(parseFloat(change_rate).toFixed(2)) + "%)";
-
-
     }
     //빗썸 btc 처리
     else {
@@ -1379,8 +1365,6 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
             "\n고가: " + (parseFloat(high_price).toFixed(8)) +
             "\n저가: " + numberWithCommas(parseFloat(low_price).toFixed(8)) +
             "\n" + change_arrow + " " + numberWithCommas(parseFloat(change_price).toFixed(8)) + "(" + parseFloat(parseFloat(change_rate).toFixed(2)) + "%)";
-
-
     }
 
     //비트코인이랑 이더리움 도미 추가
