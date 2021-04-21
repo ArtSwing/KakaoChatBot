@@ -670,7 +670,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     var command = null; // 명령어 캐치
     var value = null; // 파라미터 값
 
-    if (sp_msg.length == 1 && sp_msg[0].startsWith("&") == 1) {
+    if (sp_msg.length == 1 && sp_msg[0].startsWith("/") == 1) {
         command = "ㅩ코인ㅹ";
         value = sp_msg[0].substring(1);
     } else {
