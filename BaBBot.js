@@ -217,8 +217,8 @@ var coin_list_by_market = {
         "인슈어리움": { "symbol": "isr" },
         "파일코인": { "symbol": "fil" },
         "힙스": { "symbol": "hibs" },
-        "유니스왑": { "symbol": "uni" }
-
+        "유니스왑": { "symbol": "uni" },
+        "릿엔트리": { "symbol": "lit" }
     },
     "bithumb": {
         "메이커": { "symbol": "MKR" },
@@ -315,8 +315,9 @@ var coin_list_by_market = {
         "게이머코인": { "symbol": "GHX_BTC" },
         "힙스": { "symbol": "HIBS_BTC" },
         "어셈블프로토콜": { "symbol": "ASM_BTC" },
-        "아로와나": { "symbol": "ARW" }
-        
+        "아로와나": { "symbol": "ARW" },
+        "미스블록":{ "symbol": "MSB_BTC" },
+        "바이프로스트":{ "symbol": "BFC_BTC" }       
     },
     flat: {
         "비트코인": { "symbol": "BTC/KRW" },
