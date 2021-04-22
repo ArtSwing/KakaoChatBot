@@ -1177,11 +1177,15 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
 }
 
 //도미넌스 가져오는 함수
+/**
+ * history
+ * 20210422 권민재 fixed json.split
+ */
 function getDomi(symbol) {
     var domi = null;
 
     var json = Utils.parse("https://coinmarketcap.com/ko/charts/").body().text();
-    json = json.split("Dominance: ")[1].split("ETH Gas:")[0];
+    json = json.split("도미넌스: ")[1].split("ETH 가스:")[0];
     if (symbol.toUpperCase() == "ETH") {
         domi = json.split(" ")[3];
     } else {
