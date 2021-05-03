@@ -292,7 +292,6 @@ var coin_list_by_market = {
         "머신익스체인지코인": { "symbol": "MXC" },
         "이마이너": { "symbol": "EM" },
         "센트럴리티": { "symbol": "CENNZ" },
-        "위쇼토큰": { "symbol": "WET" },
         "브이시스템즈": { "symbol": "VSYS" },
         "루프링": { "symbol": "LRC" },
         "스시스왑": { "symbol": "SUSHI" },
@@ -590,7 +589,8 @@ var coin_list_by_market = {
         "1인치": { "symbol": "1INCH" },
         "비트코인스탠다드해시레이트토큰": { "symbol": "BTCST" },
         "비트코인캐시에이비씨": { "symbol": "BCHABC" },
-        "배저다오": { "symbol": "BADGER" }
+        "배저다오": { "symbol": "BADGER" },
+        "토코": { "symbol": "TKO" }
 
     }
 };
