@@ -611,6 +611,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     var sp_msg = msg.split(" ");
     var command = null; // 명령어 캐치
     var value = null; // 파라미터 값
+    var value2 = null; // 파라미터 값2
 
     if (sp_msg.length == 1 && sp_msg[0].startsWith("/") == 1) {
         command = "ㅩ코인ㅹ";
@@ -618,6 +619,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     } else {
         command = sp_msg[0]; // 명령어 캐치
         value = sp_msg[1]; // 파라미터 값
+        value2 = sp_msg[2]; // 파라미터 값
     }
 
     //우진이의 김프계산
@@ -773,6 +775,19 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             result += "\n" + ((i + 1) * 5) + "% : " + numberWithCommas(per[i]);
         }
         replier.reply(result);
+    }
+
+    if (command == "!강피") {
+        var high = value;
+        var low = value2;
+    
+        replier.reply(makeFibonacciReply(command,fibonacci(low, high)));
+    }
+    if (command == "!약피") {
+        var high = value;
+        var low = value2;
+        
+        replier.reply(makeFibonacciReply(command,fibonacci(high, low)));
     }
 
 }
@@ -1410,4 +1425,49 @@ function isNumeric(num, opt) {
     } else {
         return false;
     }
+}
+
+/*////////////////////////////////////
+  피보나치 차트 계산        [!강피 high = b low = a]
+                           [!약피 high = a low = b] 
+  histort - 권민재 20210524 최초제작
+        -
+////////////////////////////////////*/
+function fibonacci(a, b){
+    var result = [];
+    var coefficient = [0, 0.236, 0.382, 0.50, 0.628, 0.764, 1.00, 1.382];
+   
+    for(var i in coefficient){
+        result.push(numberWithCommas(b - (b-a)*coefficient[i]));
+    }
+
+    return_obj = {};
+    return_obj.result = result;
+    return_obj.co = coefficient;
+
+    return return_obj;
+}
+
+function makeFibonacciReply(command ,return_obj){
+    var result = return_obj.result;
+    var coefficient = return_obj.co;
+
+    var reply_str = "";
+    if(command = "!강피"){
+        reply_str += "상승추세\n"
+    }else if(command = "!약피"){
+        reply_str += "하락추세\n"
+    }
+
+    for(var i in coefficient){
+        var percent = (coefficient[i] * 100).toFixed(1) + "%";
+        reply_str += percent;
+        reply_str += " : ";
+        reply_str += result[i];
+        if(i == coefficient.length-1){
+            break;
+        }
+        reply_str += "\n";
+    }
+    return reply_str;
 }
