@@ -1454,9 +1454,9 @@ function makeFibonacciReply(command ,return_obj){
 
     var reply_str = "";
     if(command = "!강피"){
-        reply_str += "상승추세\n"
+        reply_str += "[상승추세]\n"
     }else if(command = "!약피"){
-        reply_str += "하락추세\n"
+        reply_str += "[하락추세]\n"
     }
 
     for(var i in coefficient){
