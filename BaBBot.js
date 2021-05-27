@@ -197,7 +197,7 @@ var coin_list_by_market = {
         "루아토큰": { "symbol": "lua" },
         "질리카": { "symbol": "zil" },
         "엑시얼": { "symbol": "axl" },
-        "비트코인캐시": { "symbol": "bch" },
+            "비트코인캐시": { "symbol": "bch" },
         "1인치": { "symbol": "1inch" },
         "코박토큰": { "symbol": "cbk" },
         "클레이스왑": { "symbol": "ksp" },
@@ -226,6 +226,10 @@ var coin_list_by_market = {
         "릿엔트리": { "symbol": "lit" }
     },
     "bithumb": {
+        "바이낸스코인": { "symbol": "BNB" },
+       
+        "링크플로우": { "symbol": "LF" },
+       
         "메이커": { "symbol": "MKR" },
         "앵커뉴럴월드": { "symbol": "ANW" },
         "제노토큰": { "symbol": "XNO" },
@@ -242,7 +246,7 @@ var coin_list_by_market = {
         "이브이지": { "symbol": "EVG" },
         "더마이다스터치골드": { "symbol": "TMTG" },
         "옵저버": { "symbol": "OBSR" },
-        "연파이낸스": { "symbol": "YFI" },
+          "연파이낸스": { "symbol": "YFI" },
         "리니어파이낸스": { "symbol": "LINA" },
         "프로톤": { "symbol": "XPR" },
         "바이오패스포트": { "symbol": "BIOT" },
@@ -291,7 +295,7 @@ var coin_list_by_market = {
         "스트라티스": { "symbol": "STRAX" },
         "신세틱스": { "symbol": "SNX" },
         "에이아이워크": { "symbol": "AWO" },
-        "썬": { "symbol": "SUN" },
+          "썬": { "symbol": "SUN" },
         "트루체인": { "symbol": "TRUE" },
         "에이브": { "symbol": "AAVE" },
         "머신익스체인지코인": { "symbol": "MXC" },
@@ -323,7 +327,8 @@ var coin_list_by_market = {
         "미스블록":{ "symbol": "MSB_BTC" },
         "바이프로스트":{ "symbol": "BFC_BTC" }       
     },
-    flat: {
+     flat: {
+        "아리": { "symbol": "ARI/KRW" },
         "비트코인": { "symbol": "BTC/KRW" },
         "이더리움": { "symbol": "ETH/KRW" },
         "커넥션": { "symbol": "CNT/KRW" },
@@ -364,7 +369,7 @@ var coin_list_by_market = {
         "디바": { "symbol": "DIBA/KRW" },
         "이더리움미니": { "symbol": "ETM/KRW" }
     },
-    binance: {
+     binance: {
         "하이퍼캐시": { "symbol": "HC" },
         "만트라다오": { "symbol": "OM" },
         "OG": { "symbol": "OG" },
@@ -452,7 +457,7 @@ var coin_list_by_market = {
         "피오프로토콜": { "symbol": "FIO" },
         "아이젝": { "symbol": "RLC" },
         "모나코": { "symbol": "MCO" },
-        "디아": { "symbol": "DIA" },
+           "디아": { "symbol": "DIA" },
         "비트코인 캐시": { "symbol": "BCH" },
         "쿠사마": { "symbol": "KSM" },
         "텔러": { "symbol": "TRB" },
@@ -497,7 +502,7 @@ var coin_list_by_market = {
         "루핑": { "symbol": "LRC" },
         "카이버네트워크": { "symbol": "KNC" },
         "오토": { "symbol": "AUTO" },
-        "퀀텀": { "symbol": "QTUM" },
+         "퀀텀": { "symbol": "QTUM" },
         "스톰엑스": { "symbol": "STMX" },
         "에이브": { "symbol": "LEND" },
         "컴파운드": { "symbol": "COMP" },
@@ -548,7 +553,7 @@ var coin_list_by_market = {
         "트로이": { "symbol": "TROY" },
         "엘론드": { "symbol": "EGLD" },
         "코르텍스": { "symbol": "CTXC" },
-        "토르체인": { "symbol": "RUNE" },
+            "토르체인": { "symbol": "RUNE" },
         "아이오텍스": { "symbol": "IOTX" },
         "알파체인": { "symbol": "ARPA" },
         "엔유에스디": { "symbol": "SUSD" },
@@ -595,7 +600,7 @@ var coin_list_by_market = {
         "비트코인스탠다드해시레이트토큰": { "symbol": "BTCST" },
         "비트코인캐시에이비씨": { "symbol": "BCHABC" },
         "배저다오": { "symbol": "BADGER" },
-        "토코": { "symbol": "TKO" }
+            "토코": { "symbol": "TKO" }
 
     }
 };
@@ -611,7 +616,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     var sp_msg = msg.split(" ");
     var command = null; // 명령어 캐치
     var value = null; // 파라미터 값
-    var value2 = null; // 파라미터 값2
+    var value2 = null; //파라미터값2
 
     if (sp_msg.length == 1 && sp_msg[0].startsWith("/") == 1) {
         command = "ㅩ코인ㅹ";
@@ -619,7 +624,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     } else {
         command = sp_msg[0]; // 명령어 캐치
         value = sp_msg[1]; // 파라미터 값
-        value2 = sp_msg[2]; // 파라미터 값
+        if(sp_msg.length >2) {
+            value2 = sp_msg[2]; // 파라미터 값
+           }
     }
 
     //우진이의 김프계산
@@ -633,8 +640,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
         }
     }
-
-    //마켓별 코인 리스트
+     //마켓별 코인 리스트
     let coin_list_obj = null;
     //name, symbol
     var coin_base = null;
@@ -664,8 +670,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 break;
             }
         }
-
-        if (coin_base == false) {
+     if (coin_base == false) {
             for (var idx in market_list) {
 
                 market_name = market_list[idx];
@@ -709,8 +714,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 }
             }
         }
-
-        if (coin_base == false) {
+         if (coin_base == false) {
             replier.reply(value + " 을(를) 검색할 수 없습니다.");
             return;
 
@@ -748,7 +752,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         replier.reply(result);
     }
-    if (command == "!손절") {
+     if (command == "!손절") {
 
         if (msg.split(" ").length > 2) {
             replier.reply("잘못된 명령어입니다.\n[!익절 현재가격]");
@@ -777,19 +781,18 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         replier.reply(result);
     }
 
-    if (command == "!강피") {
+  if (command == "!강피") {
         var high = value;
         var low = value2;
     
         replier.reply(makeFibonacciReply(command,fibonacci(low, high)));
     }
     if (command == "!약피") {
-        var high = value;
-        var low = value2;
+        var high = value2;
+        var low = value;
         
         replier.reply(makeFibonacciReply(command,fibonacci(high, low)));
     }
-
 }
 
 //업비트 코인 리스트
@@ -835,7 +838,8 @@ function coin_check(market_name, value, coin_list_obj) {
             }
         }
         /**************************************** 업비트 ********************************************/
-    } else if (market_name == "upbit_btc") {
+    }
+    else if (market_name == "upbit_btc") {
         /**************************************** 업비트 btc ********************************************/
         var search_map = new Map();
         // 전체 코인 리스트에서 검색한 코인들 중 KRW마켓인것만 리스트에 추가
@@ -865,7 +869,7 @@ function coin_check(market_name, value, coin_list_obj) {
                     .value;
             }
         }
-        /**************************************** 업비트 btc ********************************************/
+            /**************************************** 업비트 btc ********************************************/
     } else {
         /**************************************** other ********************************************/
         if (coin_list_obj.hasOwnProperty(value)) {
@@ -889,8 +893,7 @@ function coin_check(market_name, value, coin_list_obj) {
         return false;
     }
 }
-
-//코인 체크
+     //코인 체크
 function coin_check_cho_true(market_name, value, coin_list_obj) {
     //코인 symbol
     var symbol = null;
@@ -927,8 +930,8 @@ function coin_check_cho_true(market_name, value, coin_list_obj) {
                     .next()
                     .value;
             }
-        }
-        /**************************************** 업비트 ********************************************/
+        }   
+           /**************************************** 업비트 ********************************************/
     } else if (market_name == "upbit_btc") {
         /**************************************** 업비트 btc ********************************************/
         var search_map = new Map();
@@ -984,8 +987,7 @@ function coin_check_cho_true(market_name, value, coin_list_obj) {
         return false;
     }
 }
-
-//코인 체크
+    //코인 체크
 function coin_check_cho(market_name, value, coin_list_obj) {
     //코인 symbol
     var symbol = null;
@@ -1024,7 +1026,7 @@ function coin_check_cho(market_name, value, coin_list_obj) {
             }
         }
         /**************************************** 업비트 ********************************************/
-    } else if (market_name == "upbit_btc") {
+    }else if (market_name == "upbit_btc") {
         /**************************************** 업비트 btc ********************************************/
         var search_map = new Map();
         // 전체 코인 리스트에서 검색한 코인들 중 KRW마켓인것만 리스트에 추가
@@ -1056,7 +1058,7 @@ function coin_check_cho(market_name, value, coin_list_obj) {
             }
         }
         /**************************************** 업비트 btc ********************************************/
-    } else {
+         } else {
         /**************************************** other ********************************************/
         if (coin_list_obj.hasOwnProperty(value)) {
             name = value;
@@ -1093,8 +1095,7 @@ function setting_by_market(market_name, base_uri, info_uri, value, coin_base) {
     var change_price = null;
     //전일 대비 비율
     var change_rate = null;
-
-    coin_info_obj = coin_search(base_uri, info_uri, coin_base.symbol);
+      coin_info_obj = coin_search(base_uri, info_uri, coin_base.symbol);
 
     if (market_name == "upbit" || market_name == "upbit_btc") {
         trade_price = coin_info_obj[0].trade_price;
@@ -1146,7 +1147,6 @@ function coin_search(base_uri, info_uri, symbol) {
 
     return coin_info_obj;
 }
-
 //view message 코인 정보 make
 function coin_info(market_name, symbol, name, trade_price, high_price, low_price, change_price, change_rate, change_arrow) {
     var return_message = "";
@@ -1173,8 +1173,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
             "[" + name + "]\n" +
             "＄ " + numberWithCommas(parseFloat(trade_price));
 
-    }
-    //빗썸 btc 처리
+    }  //빗썸 btc 처리
     if (symbol.includes("_BTC")) {
         return_message =
             "[" + name + "]\n" +
@@ -1207,8 +1206,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
             "\n(￦ " + numberWithCommas(parseInt(dollar * Rate)) + ")" +
             "\n김프(" + ((trade_price / (dollar * Rate)) * 100 - 100).toFixed(2) + "%)\n";
     }
-
-    //btc 처리
+      //btc 처리
     if (symbol.includes("_BTC") || market_name == "업비트 btc마켓") {
         return_message +=
         "\n고가: " + (parseFloat(high_price).toFixed(8)) +
@@ -1234,8 +1232,7 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
 
     return return_message;
 }
-
-//도미넌스 가져오는 함수
+    //도미넌스 가져오는 함수
 /**
  * history
  * 20210422 권민재 fixed json.split
@@ -1258,7 +1255,6 @@ function exRate() {
     var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
     return parseFloat(ExRate[0].rate);
 }
-
 /*////////////////////////////////////
   3자리마다 콤마를 찍는 함수
   histort - 유한빈 20210326 최초제작
@@ -1287,8 +1283,6 @@ function cho(str) {
     }
     return res;
 }
-
-
 function UpbitKPre(msg) {
     msg.trim();
     var command = msg.split(" ")[0];
@@ -1315,7 +1309,7 @@ function UpbitKPre(msg) {
                     }
                 }
             }
-            // search_map 이름이 포함된 코인 리스트
+             // search_map 이름이 포함된 코인 리스트
             if (search_map.size > 0) {
                 search_map.forEach((market, val) => {
                     if (val == value) {
@@ -1335,8 +1329,7 @@ function UpbitKPre(msg) {
             var coin_info = Utils.getWebText(
                 "https://api.upbit.com/v1/ticker?markets=krw-" + symbol
             );
-
-            var coin_info_json = coin_info.replace(/(<([^>]+)>)/gi, "").trim();
+             var coin_info_json = coin_info.replace(/(<([^>]+)>)/gi, "").trim();
             const coin_info_obj = JSON.parse(coin_info_json);
 
             var dollar = 0.0;
@@ -1365,8 +1358,7 @@ function UpbitKPre(msg) {
                     .select(
                         "body > div.wrap > div > div.converter > div.converter-title-details > h2 > strong > span"
                     ) + "";
-
-            usdt_exchange = usdt_exchange.replace(/(<([^>]+)>)/gi, "");
+             usdt_exchange = usdt_exchange.replace(/(<([^>]+)>)/gi, "");
             dollar = dollar * usdt_exchange;
             var tradePrice = coin_info_obj[0].trade_price;
             var kimchi = ((tradePrice / (dollar * Rate)) * 100 - 100).toFixed(2);
@@ -1387,7 +1379,6 @@ function UpbitKPre(msg) {
     }
     return null;
 }
-
 String.format = function () {
     let args = arguments;
     return args[0].replace(/{(\d+)}/g, function (match, num) {
@@ -1426,7 +1417,6 @@ function isNumeric(num, opt) {
         return false;
     }
 }
-
 /*////////////////////////////////////
   피보나치 차트 계산        [!강피 high = b low = a]
                            [!약피 high = a low = b] 
@@ -1447,16 +1437,19 @@ function fibonacci(a, b){
 
     return return_obj;
 }
-
 function makeFibonacciReply(command ,return_obj){
-    var result = return_obj.result;
-    var coefficient = return_obj.co;
+    var result = [];
+    var coefficient = [];
 
     var reply_str = "";
-    if(command = "!강피"){
+    if(command == "!강피"){
         reply_str += "[상승추세]\n"
-    }else if(command = "!약피"){
+result = return_obj.result;
+    coefficient = return_obj.co;
+    }else if(command == "!약피"){
         reply_str += "[하락추세]\n"
+result = return_obj.result.reverse();
+    coefficient = return_obj.co.reverse();
     }
 
     for(var i in coefficient){
