@@ -793,6 +793,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         
         replier.reply(makeFibonacciReply(command,fibonacci(high, low)));
     }
+    if (command == "!도미"){
+        replier.reply("도미넌스 : " + getDomi(symbol));
+    }
 }
 
 //업비트 코인 리스트
@@ -1222,10 +1225,12 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
     }
 
     //비트코인이랑 이더리움 도미 추가
+    /* 20210531 권민재 !도미 명령어 추가로 인한 삭제
     if (symbol == "BTC" || symbol == "btc" || symbol == "ETH" || symbol == "eth") {
         return_message +=
             "\n도미 : " + getDomi(symbol);
     }
+    */
 
     return_message +=
         "\n\n" + market_name + " 기준";
@@ -1236,18 +1241,23 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
 /**
  * history
  * 20210422 권민재 fixed json.split
+ * 20210531 권민재 !도미 명령어 추가
  */
-function getDomi(symbol) {
+//function getDomi(symbol) {
+function getDomi() {
     var domi = null;
 
     var json = Utils.parse("https://coinmarketcap.com/ko/charts/").body().text();
     json = json.split("도미넌스: ")[1].split("ETH 가스:")[0];
+    /*
     if (symbol.toUpperCase() == "ETH") {
         domi = json.split(" ")[3];
     } else {
         domi = json.split(" ")[1];
     }
     return domi;
+    */
+   return json;
 }
 
 //환율
