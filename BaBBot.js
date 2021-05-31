@@ -1201,21 +1201,18 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
             .trim();
         const coin_info_obj_dollar = JSON.parse(coin_info_json_dollar);
         dollar = coin_info_obj_dollar.lastPrice;
-        /****************************************************************** */
-        
-
-        // api가 현재 자주먹통이 되는 현상이 발견되어 임시 주석 0528 유한빈 
-    /*    var Rate = exRate();
+       /***********************************************************/
+        var Rate = exRate();
         return_message +=
             "\n＄ " + numberWithCommas(parseFloat(dollar)) +
         
             "\n(￦ " + numberWithCommas(parseInt(dollar * Rate)) + ")" +
             "\n김프(" + ((trade_price / (dollar * Rate)) * 100 - 100).toFixed(2) + "%)\n";
- */
+ 
             
-             return_message +=
+            /* return_message +=
             "\n＄ " + numberWithCommas(parseFloat(dollar));
-                   
+*/                   
     }
       //btc 처리
     if (symbol.includes("_BTC") || market_name == "업비트 btc마켓") {
@@ -1271,8 +1268,11 @@ function getDomi() {
    return json;
 }//환율
 function exRate() {
-    var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
-    return parseFloat(ExRate[0].rate);
+   // var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
+    var ExRate = 
+JSON.parse(Utils.parse("https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD").body().text());
+    return parseFloat(ExRate[0].basePrice);
+    //return parseFloat(ExRate[0].rate);
 }
 /*////////////////////////////////////
   3자리마다 콤마를 찍는 함수
@@ -1361,13 +1361,19 @@ function UpbitKPre(msg) {
             const coin_info_obj_dollar = JSON.parse(coin_info_json_dollar);
             dollar = coin_info_obj_dollar.lastPrice;
 
-            var ExRate = Utils.getWebText(
+         /*   var ExRate = Utils.getWebText(
                 "https://api.manana.kr/exchange/rate.json?base=KRW&code=USD"
             )
                 .replace(/(<([^>]+)>)/gi, "")
                 .trim();
             const coin_info_obj_rate = JSON.parse(ExRate);
             var Rate = coin_info_obj_rate[0].rate;
+*/
+            
+            var ExRate = JSON.parse(Utils.parse("https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD").body().text());
+            const coin_info_obj_rate = ExRate;
+            var Rate = coin_info_obj_rate[0].basePrice;
+
 
             var usdt_to_usd =
                 "https://walletinvestor.com/converter/tether/usd/1";
