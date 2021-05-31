@@ -793,8 +793,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         
         replier.reply(makeFibonacciReply(command,fibonacci(high, low)));
     }
-    if (command == "!도미"){
-        replier.reply("도미넌스 : " + getDomi(symbol));
+     if (command == "!도미"){
+        replier.reply("[도미넌스]\n" + getDomi());
     }
 }
 
@@ -1202,12 +1202,20 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
         const coin_info_obj_dollar = JSON.parse(coin_info_json_dollar);
         dollar = coin_info_obj_dollar.lastPrice;
         /****************************************************************** */
-        var Rate = exRate();
+        
 
+        // api가 현재 자주먹통이 되는 현상이 발견되어 임시 주석 0528 유한빈 
+    /*    var Rate = exRate();
         return_message +=
             "\n＄ " + numberWithCommas(parseFloat(dollar)) +
+        
             "\n(￦ " + numberWithCommas(parseInt(dollar * Rate)) + ")" +
             "\n김프(" + ((trade_price / (dollar * Rate)) * 100 - 100).toFixed(2) + "%)\n";
+ */
+            
+             return_message +=
+            "\n＄ " + numberWithCommas(parseFloat(dollar));
+                   
     }
       //btc 처리
     if (symbol.includes("_BTC") || market_name == "업비트 btc마켓") {
@@ -1225,12 +1233,12 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
     }
 
     //비트코인이랑 이더리움 도미 추가
-    /* 20210531 권민재 !도미 명령어 추가로 인한 삭제
-    if (symbol == "BTC" || symbol == "btc" || symbol == "ETH" || symbol == "eth") {
+    // 20210531 권민재 !도미 명령어 추가로 인한 삭제
+   /* if (symbol == "BTC" || symbol == "btc" || symbol == "ETH" || symbol == "eth") {
         return_message +=
             "\n도미 : " + getDomi(symbol);
     }
-    */
+*/
 
     return_message +=
         "\n\n" + market_name + " 기준";
@@ -1241,14 +1249,13 @@ function coin_info(market_name, symbol, name, trade_price, high_price, low_price
 /**
  * history
  * 20210422 권민재 fixed json.split
- * 20210531 권민재 !도미 명령어 추가
  */
-//function getDomi(symbol) {
+//도미넌스 가져오는 함수
 function getDomi() {
     var domi = null;
 
     var json = Utils.parse("https://coinmarketcap.com/ko/charts/").body().text();
-    json = json.split("도미넌스: ")[1].split("ETH 가스:")[0];
+    json = json.split("도미넌스: ")[1].split("ETH 가스:")[0];   
     /*
     if (symbol.toUpperCase() == "ETH") {
         domi = json.split(" ")[3];
@@ -1257,10 +1264,12 @@ function getDomi() {
     }
     return domi;
     */
+    btc_domi= json.split("%")[0] + "%";
+    eth_domi = json.split("%")[1] + "%";
+    
+    json = btc_domi + "\n" + eth_domi.trim();
    return json;
-}
-
-//환율
+}//환율
 function exRate() {
     var ExRate = JSON.parse(Utils.parse("https://api.manana.kr/exchange/rate.json?base=KRW&code=USD").body().text());
     return parseFloat(ExRate[0].rate);
