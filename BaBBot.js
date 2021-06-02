@@ -283,7 +283,7 @@ var coin_list_by_market = {
         "에이피엠코인": { "symbol": "APM" },
         "밸러토큰": { "symbol": "VALOR" },
         "세럼": { "symbol": "SRM" },
-        "엠씨아이": { "symbol": "MCI" },
+        "싸이클럽": { "symbol": "CYCLUB" },
         "다드": { "symbol": "DAD" },
         "미러프로토콜": { "symbol": "MIR" },
         "코르텍스": { "symbol": "CTXC" },
@@ -295,7 +295,7 @@ var coin_list_by_market = {
         "스트라티스": { "symbol": "STRAX" },
         "신세틱스": { "symbol": "SNX" },
         "에이아이워크": { "symbol": "AWO" },
-          "썬": { "symbol": "SUN" },
+         "썬": { "symbol": "SUN" },
         "트루체인": { "symbol": "TRUE" },
         "에이브": { "symbol": "AAVE" },
         "머신익스체인지코인": { "symbol": "MXC" },
@@ -324,10 +324,11 @@ var coin_list_by_market = {
         "힙스": { "symbol": "HIBS_BTC" },
         "어셈블프로토콜": { "symbol": "ASM_BTC" },
         "아로와나": { "symbol": "ARW" },
-        "미스블록":{ "symbol": "MSB_BTC" },
-        "바이프로스트":{ "symbol": "BFC_BTC" }       
+        "미스블록":{ "symbol": "MSB" },
+        "베라시티":{ "symbol": "VRA" },               "바이프로스트":{ "symbol": "BFC_BTC" }       
     },
      flat: {
+        "이뱅크": { "symbol": "EBK/KRW" },
         "아리": { "symbol": "ARI/KRW" },
         "비트코인": { "symbol": "BTC/KRW" },
         "이더리움": { "symbol": "ETH/KRW" },
