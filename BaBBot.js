@@ -226,6 +226,12 @@ var coin_list_by_market = {
         "릿엔트리": { "symbol": "lit" }
     },
     "bithumb": {
+      "렌": { "symbol": "REN" },
+       
+      "셀러네트워크": { "symbol": "CELR" },
+       
+      "다이": { "symbol": "DAI" },
+       
         "바이낸스코인": { "symbol": "BNB" },
        
         "링크플로우": { "symbol": "LF" },
@@ -314,11 +320,11 @@ var coin_list_by_market = {
         "이포스": { "symbol": "WOZX" },
         "원루트네트워크": { "symbol": "RNT" },
         "라이파이낸스": { "symbol": "RAI" },
-        "맵프로토콜": { "symbol": "MAP_BTC" },
+        "맵프로토콜": { "symbol": "MAP" },
         "위드": { "symbol": "WIKEN_BTC" },
         "플레타": { "symbol": "FLETA" },
-        "너보스": { "symbol": "CKB_BTC" },
-        "콜라토큰": { "symbol": "COLA_BTC" },
+        "너보스": { "symbol": "CKB" },
+        "콜라토큰": { "symbol": "COLA" },
         "블로서리": { "symbol": "BLY_BTC" },
         "게이머코인": { "symbol": "GHX_BTC" },
         "힙스": { "symbol": "HIBS_BTC" },
