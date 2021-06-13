@@ -2,9 +2,22 @@
   전역변수 설정 부분입니다.
   historty - 오태윤 20210326 변수 최초생성
            - 유한빈 20210420 채팅통계 삭제
-        -
+           -
+유한빈 20210603 롱숏 추가 + 빗썸 추가상장 코인 추가
 ////////////////////////////////////*/
 const arr_room = ["민재", "BOT", "랩실", "로아", "실험실임"];
+
+//롱숏관련
+var types = {
+    "5분": 3,
+    "15분": 10,
+    "30분": 11,
+    "1시간": 2,
+    "4시간": 1,
+    "12시간": 4,
+    "24시간": 5
+};
+var USD = 0.0;
 
 //market list
 var market_list = ["upbit","upbit_btc", "bithumb", "flat", "coinone", "binance"];
@@ -227,6 +240,32 @@ var coin_list_by_market = {
     },
     "bithumb": {
       "렌": { "symbol": "REN" },
+      "비너스": { "symbol": "XVS" },
+      "팬케이크스왑": { "symbol": "CAKE" },
+ 
+      "폴리곤": { "symbol": "MATIC" },
+      "힙스": { "symbol": "HIBS" },
+      "위드": { "symbol": "WIKEN" },
+       
+
+       
+
+       
+       
+
+       
+
+       
+
+       
+
+       
+
+       
+      
+
+       
+
        
       "셀러네트워크": { "symbol": "CELR" },
        
@@ -321,14 +360,14 @@ var coin_list_by_market = {
         "원루트네트워크": { "symbol": "RNT" },
         "라이파이낸스": { "symbol": "RAI" },
         "맵프로토콜": { "symbol": "MAP" },
-        "위드": { "symbol": "WIKEN_BTC" },
+        
         "플레타": { "symbol": "FLETA" },
         "너보스": { "symbol": "CKB" },
         "콜라토큰": { "symbol": "COLA" },
-        "블로서리": { "symbol": "BLY_BTC" },
-        "게이머코인": { "symbol": "GHX_BTC" },
-        "힙스": { "symbol": "HIBS_BTC" },
-        "어셈블프로토콜": { "symbol": "ASM_BTC" },
+        "블로서리": { "symbol": "BLY" },
+        "게이머코인": { "symbol": "GHX" },
+       
+        "어셈블프로토콜": { "symbol": "ASM" },
         "아로와나": { "symbol": "ARW" },
         "미스블록":{ "symbol": "MSB" },
         "베라시티":{ "symbol": "VRA" },               "바이프로스트":{ "symbol": "BFC_BTC" }       
@@ -612,8 +651,46 @@ var coin_list_by_market = {
     }
 };
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
+//////////////////////////////////////////마진거래관련 0603 유한빈추가 /////////////
 
-    
+    if (msg.substr(0, 1) == "!" && msg.indexOf("마진") !== -1) {
+
+        var LongShortData = [];
+
+        var times = msg.substring(
+            1,
+            msg.indexOf(" 마진", 0)
+        );
+
+        var searchType = types[times];
+
+        var getData = Utils.parse("https://fapi.bybt.com/api/futures/longShortRate?timeType=" + searchType + "&symbol=BTC").body().text();
+        var lsData = JSON.parse(getData).data[0];
+
+        USD = getUsd();
+
+        var ALongVol = numberToKorean(Math.floor((lsData.longVolUsd * USD) / 10000)*10000);
+        var AShortVol = numberToKorean(Math.floor((lsData.shortVolUsd * USD) / 10000)*10000);
+
+        LongShortData.push({"market": "평균", "longRate": lsData.longRate, "longVol": ALongVol, "shortRate": lsData.shortRate, "shortVol": AShortVol});
+
+        for(var i=0; i<lsData.list.length; i++) {
+            var LongVol = numberToKorean(Math.floor((lsData.list[i].longVolUsd * USD) / 10000)*10000);
+            var ShortVol = numberToKorean(Math.floor((lsData.list[i].shortVolUsd * USD) / 10000)*10000);
+
+            LongShortData.push({"market": lsData.list[i].exchangeName, "longRate": lsData.list[i].longRate, "longVol": LongVol, "shortRate": lsData.list[i].shortRate, "shortVol": ShortVol});
+        }
+
+        var msgs = "[비트코인 " + times + " 롱 & 숏 데이터]";
+        for (var i=0; i<LongShortData.length; i++) {
+            msgs += "\n\n[" + LongShortData[i]["market"] + "]";
+            msgs += "\n# 롱 " + LongShortData[i]["longRate"].toFixed(2) + "% : " + LongShortData[i]["longVol"] +"원";
+            msgs += "\n# 숏 " + LongShortData[i]["shortRate"].toFixed(2) + "% : " + LongShortData[i]["shortVol"] +"원";
+        }
+
+        replier.reply(msgs);
+    }
+ //////////////////////////////////////////마진거래관련끝 0603 유한빈추가 /////////////   
     if (arr_room.indexOf(room) == -1) {
         return false;
     }
@@ -803,6 +880,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
      if (command == "!도미"){
         replier.reply("[도미넌스]\n" + getDomi());
     }
+    
+    
 }
 
 //업비트 코인 리스트
@@ -1495,4 +1574,35 @@ result = return_obj.result.reverse();
         reply_str += "\n";
     }
     return reply_str;
+}
+
+function getUsd() {
+    var usdDatas = Utils.parse("https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD").body().text();
+    var jUsdData = JSON.parse(usdDatas);
+
+    return jUsdData[0].basePrice;
+}
+
+function numberToKorean(number){
+    var inputNumber  = number < 0 ? false : number;
+    var unitWords    = ['', '만', '억', '조', '경'];
+    var splitUnit    = 10000;
+    var splitCount   = unitWords.length;
+    var resultArray  = [];
+    var resultString = '';
+
+    for (var i = 0; i < splitCount; i++){
+        var unitResult = (inputNumber % Math.pow(splitUnit, i + 1)) / Math.pow(splitUnit, i);
+        unitResult = Math.floor(unitResult);
+        if (unitResult > 0){
+            resultArray[i] = unitResult;
+        }
+    }
+
+    for (var i = 0; i < resultArray.length; i++){
+        if(!resultArray[i]) continue;
+        resultString = String(resultArray[i]) + unitWords[i] + resultString;
+    }
+
+    return resultString;
 }
