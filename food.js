@@ -1,6 +1,5 @@
 const scriptName="food.js";
-const room_name=["포니"];
-
+const room_name = ["밥봇체험관"];
 const sdcard = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
 const Command = {};
 const arr_category = {'한식','일식','중식','양식','회식','레스토랑','베트남','여름','겨울','다이어트','패스트푸드'};
