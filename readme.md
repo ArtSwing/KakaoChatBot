@@ -39,11 +39,16 @@
     - making by 권민재
 
 ##### 1.5) 바이낸스 조회
+    - making by 유한빈
 
-#### 2) 비트 상장 코인
+#### 2) BTC 마켓 상장 코인
+     - making by 유한빈
 
 ### 2. 손익
+- making by 유한빈
 
 #### 1.1 익절
+- making by 유한빈
 
 #### 1.2 손절
+- making by 유한빈
