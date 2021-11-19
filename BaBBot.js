@@ -882,7 +882,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                  //거래소에 코인이 있는지 확인
                  coin_base = coin_check(market_name, value, coin_list_obj);                                                             
          }
- if (coin_base == false) {
+        if (coin_base == false) {
              if(value2 ==null) {
                   for (var idx in market_list) {
       
@@ -922,7 +922,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                           coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
                       }
                       //거래소에 코인이 있는지 확인
-                      coin_base = coin_check(market_name, value, coin_list_obj);                                                             
+                      coin_base = coin_check_cho_true(market_name, value, coin_list_obj);                                                             
              }
           }                                                             
           if (coin_base == false) {
