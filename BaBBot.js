@@ -862,12 +862,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 }
             }
         }
-        else {
-          
-          
-           replier.reply("value : "+ value);
-           replier.reply("value2 : " +value2);
-            //거래소명 없을시
+        else {                    
+             //거래소명 없을시
             if(!market_list_kr.hasOwnProperty(value2)){
                 replier.reply("없는 거래소입니다");
                 return;
@@ -886,58 +882,54 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                  //거래소에 코인이 있는지 확인
                  coin_base = coin_check(market_name, value, coin_list_obj);                                                             
          }
- 
-      if (coin_base == false) {
-             for (var idx in market_list) {
- 
-                 market_name = market_list[idx];
+ if (coin_base == false) {
+             if(value2 ==null) {
+                  for (var idx in market_list) {
+      
+                      market_name = market_list[idx];
+                      uri_obj = api_uri[market_name];
+      
+                      if (market_name == "upbit"|| market_name == "upbit_btc" ) {
+                          //upbit에는 코인 리스트 가져오는 api가 있음
+                          coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
+                      } else {
+                          //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
+                          coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
+                      }
+      
+                      //거래소에 코인이 있는지 확인
+                      coin_base = coin_check_cho_true(market_name, cho(value), coin_list_obj);
+                      if (coin_base != false) {
+                          //있으면
+                          break;
+                      }
+                  }
+             } else {
+                 //거래소명 없을시
+                 if(!market_list_kr.hasOwnProperty(value2)){
+                     replier.reply("없는 거래소입니다");
+                     return;
+                 }
+                 else {
+                     market_name = market_list_kr[value2];
+                 }
                  uri_obj = api_uri[market_name];
- 
-                 if (market_name == "upbit"|| market_name == "upbit_btc" ) {
-                     //upbit에는 코인 리스트 가져오는 api가 있음
-                     coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
-                 } else {
-                     //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
-                     coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
-                 }
- 
-                 //거래소에 코인이 있는지 확인
-                 coin_base = coin_check_cho_true(market_name, cho(value), coin_list_obj);
-                 if (coin_base != false) {
-                     //있으면
-                     break;
-                 }
+                     if (market_name == "upbit" || market_name == "upbit_btc" ) {
+                         //upbit에는 코인 리스트 가져오는 api가 있음
+                         coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
+                     } else {
+                         //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
+                          coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
+                      }
+                      //거래소에 코인이 있는지 확인
+                      coin_base = coin_check(market_name, value, coin_list_obj);                                                             
              }
-         }
-         if (coin_base == false) {
-             for (var idx in market_list) {
- 
-                 market_name = market_list[idx];
-                 uri_obj = api_uri[market_name];
- 
-                 if (market_name == "upbit"|| market_name == "upbit_btc" ) {
-                     //upbit에는 코인 리스트 가져오는 api가 있음
-                     coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
-                 } else {
-                     //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
-                     coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
-                 }
- 
-                 //거래소에 코인이 있는지 확인
-                 coin_base = coin_check_cho(market_name, cho(value), coin_list_obj);
-                 if (coin_base != false) {
-                     //있으면
-                     break;
-                 }
-             }
-         }
+          }                                                             
           if (coin_base == false) {
              replier.reply(value + " 을(를) 검색할 수 없습니다.");
              return;
- 
          }
          replier.reply(setting_by_market(market_name, uri_obj.base_uri, uri_obj.info_uri, value, coin_base));
- 
      }
      /*
     author : 오태윤
