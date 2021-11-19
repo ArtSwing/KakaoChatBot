@@ -1266,7 +1266,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
          // 전체 코인 리스트에서 검색한 코인들 중 KRW마켓인것만 리스트에 추가
          for (var i = 0; i < coin_list_obj.length; i++) {
              test = coin_list_obj[i].korean_name;
-             if (cho(test) == value) {
+             if (cho(test).includes(value)) {
                  if (coin_list_obj[i].market.split("-")[0] == "BTC") {
                      search_map.set(coin_list_obj[i].korean_name, coin_list_obj[i].market.split("-")[1]);
                  }
