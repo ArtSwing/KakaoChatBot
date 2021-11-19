@@ -7,7 +7,6 @@
 유한빈 20211130 바이낸스 추가상장코인 + 빗썸오류수정 + 쿠코인 업데이트
 ////////////////////////////////////*/
 const arr_room = ["랩실"];
-
 //롱숏관련
 var types = {
     "5분": 3,
@@ -19,14 +18,11 @@ var types = {
     "24시간": 5
 };
 var USD = 0.0;
-
 //market list
 var market_list = ["upbit","upbit_btc", "bithumb", "kucoin", "coinone", "binance"];
-
 var market_list_kr = {"업비트":"upbit","업빗":"upbit","ㅇㅂㅌ":"upbit","업비트비티시":"upbit_btc",
 "업비트비티씨":"upbit_btc","비티씨":"upbit_btc","ㅂㅌㅆ":"upbit_btc","빗썸":"bithumb","썸":"bithumb","ㅂㅆ":"bithumb","쿠코인":"kucoin","ㅋㅋㅇ":"kucoin",
 "코인원":"coinone","ㅋㅇㅇ":"coinone","바이낸스":"binance","바낸":"binance","ㅂㄴ":"binance","ㅂㅇㄴㅅ":"binance"};
-
 //api uri obj
 var api_uri = {
     "upbit": {
@@ -751,42 +747,30 @@ var coin_list_by_market = {
 };
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
 //////////////////////////////////////////마진거래관련 0603 유한빈추가 /////////////
-
     if (msg.substr(0, 1) == "!" && msg.indexOf("마진") !== -1) {
-
         var LongShortData = [];
-
         var times = msg.substring(
             1,
             msg.indexOf(" 마진", 0)
         );
-
         var searchType = types[times];
-
         var getData = Utils.parse("https://fapi.bybt.com/api/futures/longShortRate?timeType=" + searchType + "&symbol=BTC").body().text();
         var lsData = JSON.parse(getData).data[0];
-
         USD = getUsd();
-
         var ALongVol = numberToKorean(Math.floor((lsData.longVolUsd * USD) / 10000)*10000);
         var AShortVol = numberToKorean(Math.floor((lsData.shortVolUsd * USD) / 10000)*10000);
-
         LongShortData.push({"market": "평균", "longRate": lsData.longRate, "longVol": ALongVol, "shortRate": lsData.shortRate, "shortVol": AShortVol});
-
         for(var i=0; i<lsData.list.length; i++) {
             var LongVol = numberToKorean(Math.floor((lsData.list[i].longVolUsd * USD) / 10000)*10000);
             var ShortVol = numberToKorean(Math.floor((lsData.list[i].shortVolUsd * USD) / 10000)*10000);
-
             LongShortData.push({"market": lsData.list[i].exchangeName, "longRate": lsData.list[i].longRate, "longVol": LongVol, "shortRate": lsData.list[i].shortRate, "shortVol": ShortVol});
         }
-
         var msgs = "[비트코인 " + times + " 롱 & 숏 데이터]";
         for (var i=0; i<LongShortData.length; i++) {
             msgs += "\n\n[" + LongShortData[i]["market"] + "]";
             msgs += "\n# 롱 " + LongShortData[i]["longRate"].toFixed(2) + "% : " + LongShortData[i]["longVol"] +"원";
             msgs += "\n# 숏 " + LongShortData[i]["shortRate"].toFixed(2) + "% : " + LongShortData[i]["shortVol"] +"원";
         }
-
         replier.reply(msgs);
     }
  //////////////////////////////////////////마진거래관련끝 0603 유한빈추가 /////////////   
@@ -795,12 +779,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     }
     // 메시지 좌우 공백제거
     msg = msg.trim();
-
     var sp_msg = msg.split(" ");
     var command = null; // 명령어 캐치
     var value = null; // 파라미터 값 - 코인명
     var value2 = null; //파라미터값2 - 거래소명
-
     // /코인명 거래소명
     if (sp_msg.length == 1 && sp_msg[0].startsWith("/") == 1) {
         command = "ㅩ코인ㅹ";
@@ -817,16 +799,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             value2 = sp_msg[2]; // 파라미터 값
            }
     }
-
     //우진이의 김프계산
     var rtnStr = UpbitKPre(msg);
     if (rtnStr != null) {
         if (rtnStr == "N") {
-
             replier.reply("해당 코인은 존재하지 않습니다.");
         } else {
             replier.reply(rtnStr);
-
         }
     }
      //마켓별 코인 리스트
@@ -842,10 +821,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         if(value2 ==null) {
              //거래소 순서대로
             for (var idx in market_list) {
-
                 market_name = market_list[idx];
                 uri_obj = api_uri[market_name];
-
                 if (market_name == "upbit" || market_name == "upbit_btc" ) {
                     //upbit에는 코인 리스트 가져오는 api가 있음
                     coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
@@ -853,7 +830,6 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                     //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
                     coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
                 }
-
                 //거래소에 코인이 있는지 확인
                 coin_base = coin_check(market_name, value, coin_list_obj);
                 if (coin_base != false) {
@@ -881,57 +857,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                  }
                  //거래소에 코인이 있는지 확인
                  coin_base = coin_check(market_name, value, coin_list_obj);                                                             
-         } 
-          if (coin_base == false) {
-                     for (var idx in market_list) {
-
-                         market_name = market_list[idx];
-                         uri_obj = api_uri[market_name];
-
-                         if (market_name == "upbit"|| market_name == "upbit_btc" ) {
-                             //upbit에는 코인 리스트 가져오는 api가 있음
-                             coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
-                         } else {
-                             //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
-                             coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
-                         }
-
-                         //거래소에 코인이 있는지 확인
-                         coin_base = coin_check_cho(market_name, cho(value), coin_list_obj);
-                         if (coin_base != false) {
-                             //있으면
-                             break;
-                         }
-                     }
-                 }
- ​         ​if​ ​(​coin_base​ ​==​ ​false​)​ ​{ 
- ​             ​for​ ​(​var​ ​idx​ ​in​ ​market_list​)​ ​{ 
- ​  
- ​                 ​market_name​ ​=​ ​market_list​[​idx​]​; 
- ​                 ​uri_obj​ ​=​ ​api_uri​[​market_name​]​; 
- ​  
- ​                 ​if​ ​(​market_name​ ​==​ ​"upbit"​||​ ​market_name​ ​==​ ​"upbit_btc"​ ​)​ ​{ 
- ​                     ​//upbit에는 코인 리스트 가져오는 api가 있음 
- ​                     ​coin_list_obj​ ​=​ ​coin_list_upbit​(​uri_obj​.​base_uri​,​ ​uri_obj​.​coin_list_uri​)​; 
- ​                 ​}​ ​else​ ​{ 
- ​                     ​//나머지 거래소에는 없음 @@@추후 찾거나 바꿈 
- ​                     ​coin_list_obj​ ​=​ ​coin_list_by_market​[​uri_obj​.​coin_list_uri​]​; 
- ​                 ​} 
- ​  
- ​                 ​//거래소에 코인이 있는지 확인 
- ​                 ​coin_base​ ​=​ ​coin_check_cho​(​market_name​,​ ​cho​(​value​)​,​ ​coin_list_obj​)​; 
- ​                 ​if​ ​(​coin_base​ ​!=​ ​false​)​ ​{ 
- ​                     ​//있으면 
- ​                     ​break​; 
- ​                 ​} 
- ​             ​} 
- ​         ​} 
- ​          ​if​ ​(​coin_base​ ​==​ ​false​)​ ​{ 
- ​             ​replier​.​reply​(​value​ ​+​ ​" 을(를) 검색할 수 없습니다."​)​; 
- ​             ​return​; 
- ​  
- ​         ​}
-
+         }
         if (coin_base == false) {
              if(value2 ==null) {
                   for (var idx in market_list) {
@@ -974,7 +900,50 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                       //거래소에 코인이 있는지 확인
                       coin_base = coin_check_cho_true(market_name, value, coin_list_obj);                                                             
              }
-          }                                                             
+          } 
+            if (coin_base == false) {
+             if(value2 ==null) {
+                  for (var idx in market_list) {
+      
+                      market_name = market_list[idx];
+                      uri_obj = api_uri[market_name];
+      
+                      if (market_name == "upbit"|| market_name == "upbit_btc" ) {
+                          //upbit에는 코인 리스트 가져오는 api가 있음
+                          coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
+                      } else {
+                          //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
+                          coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
+                      }
+      
+                      //거래소에 코인이 있는지 확인
+                      coin_base = coin_check_cho_true(market_name, cho(value), coin_list_obj);
+                      if (coin_base != false) {
+                          //있으면
+                          break;
+                      }
+                  }
+             } else {
+                 //거래소명 없을시
+                 if(!market_list_kr.hasOwnProperty(value2)){
+                     replier.reply("없는 거래소입니다");
+                     return;
+                 }
+                 else {
+                     market_name = market_list_kr[value2];
+                 }
+                 uri_obj = api_uri[market_name];
+                     if (market_name == "upbit" || market_name == "upbit_btc" ) {
+                         //upbit에는 코인 리스트 가져오는 api가 있음
+                         coin_list_obj = coin_list_upbit(uri_obj.base_uri, uri_obj.coin_list_uri);
+                     } else {
+                         //나머지 거래소에는 없음 @@@추후 찾거나 바꿈
+                          coin_list_obj = coin_list_by_market[uri_obj.coin_list_uri];
+                      }
+                      //거래소에 코인이 있는지 확인
+                      coin_base = coin_check_cho(market_name, value, coin_list_obj);                                                             
+             }
+          }                                                                                                      
           if (coin_base == false) {
              replier.reply(value + " 을(를) 검색할 수 없습니다.");
              return;
