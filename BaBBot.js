@@ -918,7 +918,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                       }
       
                       //거래소에 코인이 있는지 확인
-                      coin_base = coin_check_cho_true(market_name, cho(value), coin_list_obj);
+                      coin_base = coin_check_cho(market_name, cho(value), coin_list_obj);
                       if (coin_base != false) {
                           //있으면
                           break;
