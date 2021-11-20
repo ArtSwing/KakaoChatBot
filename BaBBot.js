@@ -1356,7 +1356,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
          high_price = coin_info_obj.data.high;
          low_price = coin_info_obj.data.low;
          change_price = coin_info_obj.data.changePrice;
-         change_rate = coin_info_obj.data.changeRate;
+         change_rate = coin_info_obj.data.changeRate*100;
  
      } else if (market_name == "binance") {
          trade_price = coin_info_obj.lastPrice;
